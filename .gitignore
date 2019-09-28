@@ -7,6 +7,9 @@
 # Ignore bundler config.
 /.bundle
 
+# Ignore VSCode Config
+.vscode/
+
 # Misc. System FIles
 .DS_STORE
 
