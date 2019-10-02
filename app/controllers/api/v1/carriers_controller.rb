@@ -47,7 +47,7 @@ module Api::V1
 
       # Only allow a trusted parameter "white list" through.
       def carrier_params
-        params.require(:carrier).permit(:company_name, :contact, :phone, :email, :notes)
+        params.require(:carrier).permit(:company_name, :notes)
       end
   end
 end

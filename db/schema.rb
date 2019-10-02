@@ -10,19 +10,30 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_09_27_225013) do
+ActiveRecord::Schema.define(version: 2019_10_02_234319) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "carriers", force: :cascade do |t|
     t.string "company_name"
-    t.string "contact"
-    t.string "phone"
-    t.string "email"
     t.text "notes"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.bigint "primary_contact_id"
+    t.index ["primary_contact_id"], name: "index_carriers_on_primary_contact_id"
+  end
+
+  create_table "contacts", force: :cascade do |t|
+    t.string "name"
+    t.string "phone"
+    t.string "email"
+    t.text "notes"
+    t.string "contactable_type", null: false
+    t.bigint "contactable_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["contactable_type", "contactable_id"], name: "index_contacts_on_contactable_type_and_contactable_id"
   end
 
   create_table "loads", force: :cascade do |t|
@@ -33,7 +44,6 @@ ActiveRecord::Schema.define(version: 2019_09_27_225013) do
     t.string "weight"
     t.string "dims"
     t.string "equipment"
-    t.string "dest_contact"
     t.text "notes"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
@@ -48,14 +58,15 @@ ActiveRecord::Schema.define(version: 2019_09_27_225013) do
 
   create_table "shippers", force: :cascade do |t|
     t.string "company_name"
-    t.string "contact"
-    t.string "phone"
-    t.string "email"
     t.text "notes"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.bigint "primary_contact_id"
+    t.index ["primary_contact_id"], name: "index_shippers_on_primary_contact_id"
   end
 
+  add_foreign_key "carriers", "contacts", column: "primary_contact_id"
   add_foreign_key "loads", "carriers"
   add_foreign_key "loads", "shippers"
+  add_foreign_key "shippers", "contacts", column: "primary_contact_id"
 end
