@@ -11,9 +11,6 @@ require 'faker'
 5.times do
   Carrier.create(
     company_name: Faker::Company.name,
-    contact: Faker::Name.name,
-    phone: Faker::PhoneNumber.phone_number,
-    email: Faker::Internet.email,
     notes: Faker::TvShows::BojackHorseman.quote
   )  
 end
@@ -21,14 +18,11 @@ end
 5.times do
   Shipper.create(
     company_name: Faker::Company.name,
-    contact: Faker::Name.name,
-    phone: Faker::PhoneNumber.phone_number,
-    email: Faker::Internet.email,
     notes: Faker::TvShows::BojackHorseman.quote
   )  
 end
 
-8.times do
+10.times do
   Load.create(
     origin: Faker::Address.full_address,
     destination: Faker::Address.full_address,
@@ -37,12 +31,31 @@ end
     weight: Random.new.rand(5000..40000).round(-3),
     dims: "6x3x2",
     equipment: "Van",
-    dest_contact: "#{Faker::Name.name}, #{Faker::PhoneNumber.phone_number}",
     notes: Faker::TvShows::BojackHorseman.quote,
-    carrier_id: Random.new.rand(0..4),
-    shipper_id: Random.new.rand(0..4),
+    carrier_id: Random.new.rand(1..5),
+    shipper_id: Random.new.rand(1..5),
     amt_charged: Random.new.rand(1750..2200).round(-2),
     amt_paid: Random.new.rand(500..1500).round(-2),
     complete: false
   )
+end
+
+10.times do
+  Contact.create(
+    name: Faker::Name.name,
+    phone: Faker::PhoneNumber.phone_number,
+    email: Faker::Internet.email,
+    notes: Faker::TvShows::BojackHorseman.quote,
+    contactable: Shipper.order('RANDOM()').first 
+  )  
+end
+
+10.times do
+  Contact.create(
+    name: Faker::Name.name,
+    phone: Faker::PhoneNumber.phone_number,
+    email: Faker::Internet.email,
+    notes: Faker::TvShows::BojackHorseman.quote,
+    contactable: Carrier.order('RANDOM()').first
+  )  
 end
