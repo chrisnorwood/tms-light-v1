@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 # Test suite for the Shipper model
-RSpec.describe Shippper, type: :model do
+RSpec.describe Shipper, type: :model do
   # Associations
 
   # Validations
