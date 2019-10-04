@@ -1,26 +1,8 @@
-# README
-
+# TMS-Light (v1)
 * Initial project created similar in structure to the Heroku & Bruno B. tutorial
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+## Testing
+`rake rspec` Run all specs with `--documentation` formatting
 
-Things you may want to cover:
-
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+## Booting the dev server
+`rake start` spins up Foreman with the API on port 3001 and the react app on port 3000
