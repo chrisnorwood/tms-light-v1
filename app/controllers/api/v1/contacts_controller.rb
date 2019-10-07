@@ -38,6 +38,7 @@ module Api::V1
     # DELETE /contacts/1
     def destroy
       @contact.destroy
+      head :no_content
     end
 
     private

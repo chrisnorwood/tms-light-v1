@@ -14,37 +14,31 @@ module Api::V1
         @loads = Load.all
       end
 
-      render json: @loads
+      json_response(@loads)
     end
 
-    # GET /loads/1
+    # GET /loads/:id
     def show
-      render json: @load
+      json_response(@load)
     end
 
     # POST /loads
     def create
-      @load = Load.new(load_params)
+      @load = Load.create!(load_params)
 
-      if @load.save
-        render json: @load, status: :created, location: @load
-      else
-        render json: @load.errors, status: :unprocessable_entity
-      end
+      json_response(@load, :created)
     end
 
-    # PATCH/PUT /loads/1
+    # PATCH/PUT /loads/:id
     def update
-      if @load.update(load_params)
-        render json: @load
-      else
-        render json: @load.errors, status: :unprocessable_entity
-      end
+      @load.update(load_params)
+      head :no_content
     end
 
-    # DELETE /loads/1
+    # DELETE /loads/:id
     def destroy
       @load.destroy
+      head :no_content
     end
 
     private
@@ -55,7 +49,7 @@ module Api::V1
 
       # Only allow a trusted parameter "white list" through.
       def load_params
-        params.require(:load).permit(:origin, :destination, :pick_up, :delivery, :weight, :dims, :equipment, :notes)
+        params.require(:load).permit(:origin, :destination, :pick_up, :delivery, :weight, :dims, :equipment, :notes, :amt_charged, :amt_paid, :complete, :shipper_id, :carrier_id)
       end
   end
 end

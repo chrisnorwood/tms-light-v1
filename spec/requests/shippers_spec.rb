@@ -139,6 +139,5 @@ RSpec.describe 'Shippers API', type: :request do
         expect(response.body).to match(/Couldn't find Shipper/)
       end
     end
-
   end
 end

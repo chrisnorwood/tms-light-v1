@@ -141,7 +141,7 @@ RSpec.describe 'Contacts API', type: :request do
     end
 
     context 'when the record does not exist' do
-      # invalid shipper_id, though payload is still valid
+      # invalid contact_id, though payload is still valid
       let(:contact_id) { 696969 }
 
       it 'returns status code 404' do
@@ -169,7 +169,7 @@ RSpec.describe 'Contacts API', type: :request do
     end
 
     context 'when the record does not exist' do
-      # invalid shipper_id
+      # invalid contact_id
       let(:contact_id) { 696969 }
 
       it 'returns status code 404' do
