@@ -3,8 +3,16 @@ module Api::V1
     before_action :set_load, only: [:show, :update, :destroy]
 
     # GET /loads
+    # GET /loads?shipper=shipper_id
+    # GET /loads?carrier=carrier_id
     def index
-      @loads = Load.all
+      if params[:shipper]
+        @loads = Load.where(shipper_id: params[:shipper])
+      elsif params[:carrier]
+        @loads = Load.where(carrier_id: params[:carrier])
+      else
+        @loads = Load.all
+      end
 
       render json: @loads
     end

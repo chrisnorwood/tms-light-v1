@@ -3,8 +3,16 @@ module Api::V1
     before_action :set_contact, only: [:show, :update, :destroy]
 
     # GET /contacts
+    # GET /contacts?shipper=shipper_id
+    # GET /contacts?carrier=carrier_id
     def index
-      @contacts = Contact.all
+      if params[:shipper]
+        @contacts = Contact.where(contactable_type: 'Shipper', contactable_id: params[:shipper])
+      elsif params[:carrier]
+        @contacts = Contact.where(contactable_type: 'Carrier', contactable_id: params[:carrier])
+      else
+        @contacts = Contact.all
+      end
 
       render json: @contacts
     end
