@@ -27,7 +27,7 @@ module Api::V1
       head :no_content
     end
 
-    # DELETE /carriers/1
+    # DELETE /carriers/:id
     def destroy
       @carrier.destroy
       head :no_content

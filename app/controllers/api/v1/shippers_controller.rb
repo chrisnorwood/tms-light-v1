@@ -6,37 +6,31 @@ module Api::V1
     def index
       @shippers = Shipper.all
 
-      render json: @shippers
+      json_response(@shippers)
     end
 
-    # GET /shippers/1
+    # GET /shippers/:id
     def show
-      render json: @shipper
+      json_response(@shipper)
     end
 
     # POST /shippers
     def create
-      @shipper = Shipper.new(shipper_params)
+      @shipper = Shipper.create!(shipper_params)
 
-      if @shipper.save
-        render json: @shipper, status: :created, location: @shipper
-      else
-        render json: @shipper.errors, status: :unprocessable_entity
-      end
+      json_response(@shipper, :created)
     end
 
-    # PATCH/PUT /shippers/1
+    # PATCH/PUT /shippers/:id
     def update
-      if @shipper.update(shipper_params)
-        render json: @shipper
-      else
-        render json: @shipper.errors, status: :unprocessable_entity
-      end
+      @shipper.update(shipper_params)
+      head :no_content
     end
 
-    # DELETE /shippers/1
+    # DELETE /shippers/:id
     def destroy
       @shipper.destroy
+      head :no_content
     end
 
     private
