@@ -5,38 +5,32 @@ module Api::V1
     # GET /carriers
     def index
       @carriers = Carrier.all
-
-      render json: @carriers
+      
+      json_response(@carriers)
     end
 
-    # GET /carriers/1
+    # GET /carriers/:id
     def show
-      render json: @carrier
+      json_response(@carrier)
     end
 
     # POST /carriers
     def create
-      @carrier = Carrier.new(carrier_params)
+      @carrier = Carrier.create!(carrier_params)
 
-      if @carrier.save
-        render json: @carrier, status: :created, location: @carrier
-      else
-        render json: @carrier.errors, status: :unprocessable_entity
-      end
+      json_response(@carrier, :created)
     end
 
-    # PATCH/PUT /carriers/1
+    # PATCH/PUT /carriers/:id
     def update
-      if @carrier.update(carrier_params)
-        render json: @carrier
-      else
-        render json: @carrier.errors, status: :unprocessable_entity
-      end
+      @carrier.update(carrier_params)
+      head :no_content
     end
 
     # DELETE /carriers/1
     def destroy
       @carrier.destroy
+      head :no_content
     end
 
     private
