@@ -14,32 +14,25 @@ module Api::V1
         @contacts = Contact.all
       end
 
-      render json: @contacts
+      json_response(@contacts)
     end
 
     # GET /contacts/1
     def show
-      render json: @contact
+      json_response(@contact)
     end
 
     # POST /contacts
     def create
-      @contact = Contact.new(contact_params)
+      @contact = Contact.create!(contact_params)
 
-      if @contact.save
-        render json: @contact, status: :created, location: @contact
-      else
-        render json: @contact.errors, status: :unprocessable_entity
-      end
+      json_response(@contact, :created)
     end
 
     # PATCH/PUT /contacts/1
     def update
-      if @contact.update(contact_params)
-        render json: @contact
-      else
-        render json: @contact.errors, status: :unprocessable_entity
-      end
+      @contact.update(contact_params)
+      head :no_content
     end
 
     # DELETE /contacts/1

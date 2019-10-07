@@ -3,7 +3,7 @@ require 'rails_helper'
 RSpec.describe 'Shippers API', type: :request do
   # initialize test data
   let!(:shippers) { create_list(:shipper, 10) }
-  let!(:shipper_id) { shippers.first.id }
+  let(:shipper_id) { shippers.first.id }
 
   # Test suite for GET /api/v1/shippers
   describe 'GET /api/v1/shippers' do
@@ -38,7 +38,7 @@ RSpec.describe 'Shippers API', type: :request do
     end
 
     context 'when the record does not exist' do
-      let(:shipper_id) { 100 }
+      let(:shipper_id) { 696969 }
 
       it 'returns status code 404' do
         expect(response).to have_http_status(404)
@@ -101,7 +101,7 @@ RSpec.describe 'Shippers API', type: :request do
 
     context 'when the record does not exist' do
       # invalid shipper_id, though payload is still valid
-      let(:shipper_id) { 100 }
+      let(:shipper_id) { 696969 }
 
       it 'returns status code 404' do
         expect(response).to have_http_status(404)
@@ -129,7 +129,7 @@ RSpec.describe 'Shippers API', type: :request do
 
     context 'when the record does not exist' do
       # invalid shipper_id
-      let(:shipper_id) { 100 }
+      let(:shipper_id) { 696969 }
 
       it 'returns status code 404' do
         expect(response).to have_http_status(404)

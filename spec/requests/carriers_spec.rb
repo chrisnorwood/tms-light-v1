@@ -3,7 +3,7 @@ require 'rails_helper'
 RSpec.describe 'Carriers API', type: :request do
   # initialize test data
   let!(:carriers) { create_list(:carrier, 10) }
-  let!(:carrier_id) { carriers.first.id }
+  let(:carrier_id) { carriers.first.id }
 
   # Test suite for GET /api/v1/carriers
   describe 'GET /api/v1/carriers' do
@@ -38,7 +38,7 @@ RSpec.describe 'Carriers API', type: :request do
     end
 
     context 'when the record does not exist' do
-      let(:carrier_id) { 100 }
+      let(:carrier_id) { 696969 }
 
       it 'returns status code 404' do
         expect(response).to have_http_status(404)
@@ -101,7 +101,7 @@ RSpec.describe 'Carriers API', type: :request do
 
     context 'when the record does not exist' do
       # invalid carrier_id, though payload is still valid
-      let(:carrier_id) { 100 }
+      let(:carrier_id) { 696969 }
 
       it 'returns status code 404' do
         expect(response).to have_http_status(404)
@@ -129,7 +129,7 @@ RSpec.describe 'Carriers API', type: :request do
 
     context 'when the record does not exist' do
       # invalid carrier_id
-      let(:carrier_id) { 100 }
+      let(:carrier_id) { 696969 }
 
       it 'returns status code 404' do
         expect(response).to have_http_status(404)

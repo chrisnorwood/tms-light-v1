@@ -4,7 +4,19 @@ FactoryBot.define do
     phone { Faker::PhoneNumber.phone_number }
     email { Faker::Internet.email }
     notes { Faker::TvShows::BojackHorseman.quote }
-    contactable { |c| c.association(:shipper) }
+    for_shipper
+
+    trait :for_load do
+      association(:contactable, factory: :load)
+    end
+
+    trait :for_shipper do
+      association(:contactable, factory: :shipper)
+    end
+
+    trait :for_carrier do
+      association(:contactable, factory: :carrier)
+    end
   end
 
   factory :shipper_contact do
