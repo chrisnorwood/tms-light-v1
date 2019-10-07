@@ -1,5 +1,6 @@
 # TMS-Light (v1)
 * Initial project created similar in structure to the Heroku & Bruno B. tutorial
+* API testing & JWT Implementation from Austin Kabiru's Rails API article on Scotch.io
 
 ## Testing
 `rake rspec` 
