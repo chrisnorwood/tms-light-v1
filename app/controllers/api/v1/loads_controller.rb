@@ -7,11 +7,11 @@ module Api::V1
     # GET /loads?carrier=carrier_id
     def index
       if params[:shipper]
-        @loads = Load.where(shipper_id: params[:shipper])
+        @loads = current_user.loads.where(shipper_id: params[:shipper])
       elsif params[:carrier]
-        @loads = Load.where(carrier_id: params[:carrier])
+        @loads = current_user.loads.where(carrier_id: params[:carrier])
       else
-        @loads = Load.all
+        @loads = current_user.loads.all
       end
 
       json_response(@loads)
@@ -24,7 +24,7 @@ module Api::V1
 
     # POST /loads
     def create
-      @load = Load.create!(load_params)
+      @load = current_user.loads.create!(load_params)
 
       json_response(@load, :created)
     end
@@ -44,7 +44,7 @@ module Api::V1
     private
       # Use callbacks to share common setup or constraints between actions.
       def set_load
-        @load = Load.find(params[:id])
+        @load = current_user.loads.find(params[:id])
       end
 
       # Only allow a trusted parameter "white list" through.

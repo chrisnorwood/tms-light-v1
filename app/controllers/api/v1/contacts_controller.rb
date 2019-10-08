@@ -7,11 +7,11 @@ module Api::V1
     # GET /contacts?carrier=carrier_id
     def index
       if params[:shipper]
-        @contacts = Contact.where(contactable_type: 'Shipper', contactable_id: params[:shipper])
+        @contacts = current_user.contacts.where(contactable_type: 'Shipper', contactable_id: params[:shipper])
       elsif params[:carrier]
-        @contacts = Contact.where(contactable_type: 'Carrier', contactable_id: params[:carrier])
+        @contacts = current_user.contacts.where(contactable_type: 'Carrier', contactable_id: params[:carrier])
       else
-        @contacts = Contact.all
+        @contacts = current_user.contacts.all
       end
 
       json_response(@contacts)
@@ -24,7 +24,7 @@ module Api::V1
 
     # POST /contacts
     def create
-      @contact = Contact.create!(contact_params)
+      @contact = current_user.contacts.create!(contact_params)
 
       json_response(@contact, :created)
     end
@@ -44,7 +44,7 @@ module Api::V1
     private
       # Use callbacks to share common setup or constraints between actions.
       def set_contact
-        @contact = Contact.find(params[:id])
+        @contact = current_user.contacts.find(params[:id])
       end
 
       # Only allow a trusted parameter "white list" through.

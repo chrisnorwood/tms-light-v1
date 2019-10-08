@@ -4,7 +4,7 @@ module Api::V1
 
     # GET /shippers
     def index
-      @shippers = Shipper.all
+      @shippers = current_user.shippers.all
 
       json_response(@shippers)
     end
@@ -16,7 +16,7 @@ module Api::V1
 
     # POST /shippers
     def create
-      @shipper = Shipper.create!(shipper_params)
+      @shipper = current_user.shippers.create!(shipper_params)
 
       json_response(@shipper, :created)
     end
@@ -36,7 +36,7 @@ module Api::V1
     private
       # Use callbacks to share common setup or constraints between actions.
       def set_shipper
-        @shipper = Shipper.find(params[:id])
+        @shipper = current_user.shippers.find(params[:id])
       end
 
       # Only allow a trusted parameter "white list" through.

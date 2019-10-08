@@ -5,7 +5,9 @@ Rails.application.routes.draw do
       resources :loads
       resources :shippers
       resources :carriers
+
+      post 'auth/login', to: 'authentication#authenticate'
+      post 'signup', to: 'users#create'
     end
   end
-
 end

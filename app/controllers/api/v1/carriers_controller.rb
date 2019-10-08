@@ -4,7 +4,7 @@ module Api::V1
 
     # GET /carriers
     def index
-      @carriers = Carrier.all
+      @carriers = current_user.carriers
       
       json_response(@carriers)
     end
@@ -16,7 +16,7 @@ module Api::V1
 
     # POST /carriers
     def create
-      @carrier = Carrier.create!(carrier_params)
+      @carrier = current_user.carriers.create!(carrier_params)
 
       json_response(@carrier, :created)
     end
@@ -36,12 +36,12 @@ module Api::V1
     private
       # Use callbacks to share common setup or constraints between actions.
       def set_carrier
-        @carrier = Carrier.find(params[:id])
+        @carrier = current_user.carriers.find(params[:id])
       end
 
       # Only allow a trusted parameter "white list" through.
       def carrier_params
-        params.require(:carrier).permit(:company_name, :notes, :user_id)
+        params.require(:carrier).permit(:company_name, :notes)
       end
   end
 end

@@ -8,14 +8,15 @@ RSpec.describe 'Loads API', type: :request do
   let(:load_shipper) { loads.first.shipper }
   let(:load_carrier) { loads.first.carrier }
   
-  let!(:shippers) { create_list(:shipper, 10) }
+  let!(:shippers) { create_list(:shipper, 10, user: user) }
   let(:valid_shipper_id) { shippers.first.id }
 
+  let(:headers) { valid_headers }
 
   # Test suite for GET /api/v1/loads
   describe 'GET /api/v1/loads' do
     context 'when requesting all loads' do
-      before { get '/api/v1/loads' }
+      before { get '/api/v1/loads', params: {}, headers: headers }
 
       it 'returns loads' do
         expect(json).not_to be_empty
@@ -28,7 +29,7 @@ RSpec.describe 'Loads API', type: :request do
     end
 
     context 'when requesting shipper loads' do
-      before { get "/api/v1/loads?shipper=#{load_shipper.id}" }
+      before { get "/api/v1/loads?shipper=#{load_shipper.id}", params: {}, headers: headers }
 
       it 'returns loads of the shipper' do
         expect(json).not_to be_empty
@@ -42,7 +43,7 @@ RSpec.describe 'Loads API', type: :request do
     end
 
     context 'when requesting carrier loads' do
-      before { get "/api/v1/loads?carrier=#{load_carrier.id}" }
+      before { get "/api/v1/loads?carrier=#{load_carrier.id}", params: {}, headers: headers }
 
       it 'returns loads of the carrier' do
         expect(json).not_to be_empty
@@ -58,7 +59,7 @@ RSpec.describe 'Loads API', type: :request do
 
   # Test suite for GET /api/v1/loads/:id
   describe 'GET /api/v1/loads/:id' do
-    before { get "/api/v1/loads/#{load_id}" }
+    before { get "/api/v1/loads/#{load_id}", params: {}, headers: headers }
 
     context 'when the record exists' do
       it 'returns the load' do
@@ -94,11 +95,11 @@ RSpec.describe 'Loads API', type: :request do
         destination: 'KY',
         shipper_id: shipper.id,
         user_id: user.id
-      }}
+      }}.to_json
     }
 
     context 'when the request is valid' do
-      before { post '/api/v1/loads', params: valid_attributes }
+      before { post '/api/v1/loads', params: valid_attributes, headers: headers }
 
       it 'creates a load' do
         expect(json['origin']).to eq('Oceanside')
@@ -110,7 +111,7 @@ RSpec.describe 'Loads API', type: :request do
     end
 
     context 'when the request is invalid' do
-      before { post '/api/v1/loads', params: { load: { origin: '', destination: '', user_id: user.id }} }
+      before { post '/api/v1/loads', params: { load: { origin: '', destination: '', user_id: user.id }}.to_json, headers: headers }
 
       it 'returns status code 422' do
         expect(response).to have_http_status(422)
@@ -132,11 +133,11 @@ RSpec.describe 'Loads API', type: :request do
         amt_charged: '1700',
         amt_paid: '1200',
         complete: false
-      }}
+      }}.to_json
     }
 
     # make HTTP get request before each example
-    before { put "/api/v1/loads/#{load_id}", params: valid_attributes }
+    before { put "/api/v1/loads/#{load_id}", params: valid_attributes, headers: headers }
 
     context 'when the record exists' do
       it 'updates the record' do
@@ -164,7 +165,7 @@ RSpec.describe 'Loads API', type: :request do
 
   # Test suite for DELETE /api/v1/loads/:id
   describe 'DELETE /api/v1/loads/:id' do
-    before { delete "/api/v1/loads/#{load_id}" }
+    before { delete "/api/v1/loads/#{load_id}", params: {}, headers: headers }
 
     context 'when the record exists' do
       it 'deletes the record' do

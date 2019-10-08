@@ -5,11 +5,12 @@ RSpec.describe 'Shippers API', type: :request do
   let(:user) { create(:user) }
   let!(:shippers) { create_list(:shipper, 10, user: user) }
   let(:shipper_id) { shippers.first.id }
+  let(:headers) { valid_headers }
 
   # Test suite for GET /api/v1/shippers
   describe 'GET /api/v1/shippers' do
     # make HTTP get request before each example
-    before { get '/api/v1/shippers' }
+    before { get '/api/v1/shippers', params: {}, headers: headers }
 
     it 'returns shippers' do
       # `json` is custom helper to parse JSON into ruby hash
@@ -25,7 +26,7 @@ RSpec.describe 'Shippers API', type: :request do
   # Test suite for GET /api/v1/shippers/:id
   describe 'GET /api/v1/shippers/:id' do
     # make HTTP get request before each example
-    before { get "/api/v1/shippers/#{shipper_id}" }
+    before { get "/api/v1/shippers/#{shipper_id}", params: {}, headers: headers }
 
     context 'when the record exists' do
       it 'returns the shipper' do
@@ -54,10 +55,10 @@ RSpec.describe 'Shippers API', type: :request do
   # Test suite for POST /api/v1/shippers
   describe 'POST /api/v1/shippers' do
     # valid payload
-    let(:valid_attributes) { {shipper: { company_name: 'Company, Inc.', notes: 'Lorem ipsum and such', user_id: user.id }} }
+    let(:valid_attributes) { {shipper: { company_name: 'Company, Inc.', notes: 'Lorem ipsum and such', user_id: user.id }}.to_json }
 
     context 'when the request is valid' do
-      before { post '/api/v1/shippers', params: valid_attributes }
+      before { post '/api/v1/shippers', params: valid_attributes, headers: headers }
 
       it 'creates a shipper' do
         expect(json['company_name']).to eq('Company, Inc.')
@@ -69,7 +70,7 @@ RSpec.describe 'Shippers API', type: :request do
     end
 
     context 'when the request is invalid' do
-      before { post '/api/v1/shippers', params: { shipper: { company_name: '', user_id: user.id }} }
+      before { post '/api/v1/shippers', params: { shipper: { company_name: '', user_id: user.id }}.to_json, headers: headers }
 
       it 'returns status code 422' do
         expect(response).to have_http_status(422)
@@ -85,10 +86,10 @@ RSpec.describe 'Shippers API', type: :request do
   # Test suite for PUT /api/v1/shippers/:id
   describe 'PUT /api/v1/shippers/:id' do
     # valid payload
-    let(:valid_attributes) { {shipper: { company_name: 'Company, Inc.', notes: 'Lorem ipsum and such' }} }
+    let(:valid_attributes) { {shipper: { company_name: 'Company, Inc.', notes: 'Lorem ipsum and such' }}.to_json }
 
     # make HTTP get request before each example
-    before { put "/api/v1/shippers/#{shipper_id}", params: valid_attributes }
+    before { put "/api/v1/shippers/#{shipper_id}", params: valid_attributes, headers: headers }
 
     context 'when the record exists' do
       it 'updates the record' do
@@ -116,7 +117,7 @@ RSpec.describe 'Shippers API', type: :request do
 
   # Test suite for DELETE /api/v1/shippers/:id
   describe 'DELETE /api/v1/shippers/:id' do
-    before { delete "/api/v1/shippers/#{shipper_id}" }
+    before { delete "/api/v1/shippers/#{shipper_id}", params: {}, headers: headers }
 
     context 'when the record exists' do
       it 'deletes the record' do
