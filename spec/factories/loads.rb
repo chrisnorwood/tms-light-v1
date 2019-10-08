@@ -15,5 +15,6 @@ FactoryBot.define do
     complete { false }
     shipper
     carrier
+    user
   end
 end

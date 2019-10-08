@@ -2,7 +2,8 @@ require 'rails_helper'
 
 RSpec.describe 'Loads API', type: :request do
   # initialize test data
-  let!(:loads) { create_list(:load, 10) }
+  let(:user) { create(:user) }
+  let!(:loads) { create_list(:load, 10, user: user) }
   let(:load_id) { loads.first.id }
   let(:load_shipper) { loads.first.shipper }
   let(:load_carrier) { loads.first.carrier }
@@ -92,6 +93,7 @@ RSpec.describe 'Loads API', type: :request do
         origin: 'Oceanside', 
         destination: 'KY',
         shipper_id: shipper.id,
+        user_id: user.id
       }}
     }
 
@@ -108,7 +110,7 @@ RSpec.describe 'Loads API', type: :request do
     end
 
     context 'when the request is invalid' do
-      before { post '/api/v1/loads', params: { load: { origin: '', destination: '' }} }
+      before { post '/api/v1/loads', params: { load: { origin: '', destination: '', user_id: user.id }} }
 
       it 'returns status code 422' do
         expect(response).to have_http_status(422)

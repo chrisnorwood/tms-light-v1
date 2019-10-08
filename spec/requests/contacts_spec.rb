@@ -2,8 +2,9 @@ require 'rails_helper'
 
 RSpec.describe 'Contacts API', type: :request do
   # initialize test data
-  let!(:contacts) { create_list(:contact, 10) }
-  let!(:shippers) { create_list(:shipper, 10) }
+  let(:user) { create(:user) }
+  let!(:contacts) { create_list(:contact, 10, user: user) }
+  let!(:shippers) { create_list(:shipper, 10, user: user) }
   let(:valid_shipper_id) { shippers.first.id }
   let(:contact_id) { contacts.first.id }
   let(:contact_shipper_id) { contacts.first.contactable.id }
@@ -88,7 +89,7 @@ RSpec.describe 'Contacts API', type: :request do
     # valid payload
     let(:valid_attributes) { 
       { contact: 
-        { name: 'John Doe', phone: '1234567890', email: 'john@doe.net', contactable_type: 'Shipper', contactable_id: valid_shipper_id }
+        { name: 'John Doe', phone: '1234567890', email: 'john@doe.net', contactable_type: 'Shipper', contactable_id: valid_shipper_id, user_id: user.id }
       }
     }
 

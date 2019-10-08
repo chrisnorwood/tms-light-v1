@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_10_07_204435) do
+ActiveRecord::Schema.define(version: 2019_10_07_225404) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -21,7 +21,9 @@ ActiveRecord::Schema.define(version: 2019_10_07_204435) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.bigint "primary_contact_id"
+    t.bigint "user_id", null: false
     t.index ["primary_contact_id"], name: "index_carriers_on_primary_contact_id"
+    t.index ["user_id"], name: "index_carriers_on_user_id"
   end
 
   create_table "contacts", force: :cascade do |t|
@@ -33,7 +35,9 @@ ActiveRecord::Schema.define(version: 2019_10_07_204435) do
     t.bigint "contactable_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.bigint "user_id", null: false
     t.index ["contactable_type", "contactable_id"], name: "index_contacts_on_contactable_type_and_contactable_id"
+    t.index ["user_id"], name: "index_contacts_on_user_id"
   end
 
   create_table "loads", force: :cascade do |t|
@@ -52,8 +56,10 @@ ActiveRecord::Schema.define(version: 2019_10_07_204435) do
     t.decimal "amt_charged"
     t.decimal "amt_paid"
     t.boolean "complete"
+    t.bigint "user_id", null: false
     t.index ["carrier_id"], name: "index_loads_on_carrier_id"
     t.index ["shipper_id"], name: "index_loads_on_shipper_id"
+    t.index ["user_id"], name: "index_loads_on_user_id"
   end
 
   create_table "shippers", force: :cascade do |t|
@@ -62,11 +68,25 @@ ActiveRecord::Schema.define(version: 2019_10_07_204435) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.bigint "primary_contact_id"
+    t.bigint "user_id", null: false
     t.index ["primary_contact_id"], name: "index_shippers_on_primary_contact_id"
+    t.index ["user_id"], name: "index_shippers_on_user_id"
+  end
+
+  create_table "users", force: :cascade do |t|
+    t.string "name"
+    t.string "email"
+    t.string "password_digest"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
   end
 
   add_foreign_key "carriers", "contacts", column: "primary_contact_id"
+  add_foreign_key "carriers", "users"
+  add_foreign_key "contacts", "users"
   add_foreign_key "loads", "carriers"
   add_foreign_key "loads", "shippers"
+  add_foreign_key "loads", "users"
   add_foreign_key "shippers", "contacts", column: "primary_contact_id"
+  add_foreign_key "shippers", "users"
 end

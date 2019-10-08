@@ -49,7 +49,7 @@ module Api::V1
 
       # Only allow a trusted parameter "white list" through.
       def contact_params
-        params.require(:contact).permit(:name, :phone, :email, :notes, :contactable_id, :contactable_type)
+        params.require(:contact).permit(:name, :phone, :email, :notes, :contactable_id, :contactable_type, :user_id)
       end
   end
 end

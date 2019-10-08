@@ -2,7 +2,8 @@ require 'rails_helper'
 
 RSpec.describe 'Carriers API', type: :request do
   # initialize test data
-  let!(:carriers) { create_list(:carrier, 10) }
+  let(:user) { create(:user) }
+  let!(:carriers) { create_list(:carrier, 10, user: user) }
   let(:carrier_id) { carriers.first.id }
 
   # Test suite for GET /api/v1/carriers
@@ -53,12 +54,13 @@ RSpec.describe 'Carriers API', type: :request do
   # Test suite for POST /api/v1/carriers
   describe 'POST /api/v1/carriers' do
     # valid payload
-    let(:valid_attributes) { {carrier: { company_name: 'Company, Inc.', notes: 'Lorem ipsum and such' }} }
+    let(:valid_attributes) { {carrier: { company_name: 'Company, Inc.', notes: 'Lorem ipsum and such', user_id: user.id }} }
 
     context 'when the request is valid' do
       before { post '/api/v1/carriers', params: valid_attributes }
 
       it 'creates a carrier' do
+        # expect(json['company_name']).to eq('Company, Inc.')
         expect(json['company_name']).to eq('Company, Inc.')
       end
 
@@ -68,7 +70,7 @@ RSpec.describe 'Carriers API', type: :request do
     end
 
     context 'when the request is invalid' do
-      before { post '/api/v1/carriers', params: { carrier: { company_name: '' }} }
+      before { post '/api/v1/carriers', params: { carrier: { company_name: '', user_id: user.id }} }
 
       it 'returns status code 422' do
         expect(response).to have_http_status(422)

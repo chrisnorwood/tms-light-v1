@@ -3,6 +3,7 @@ require 'rails_helper'
 # Test suite for the Contact model
 RSpec.describe Contact, type: :model do
   # Associations
+  it { should belong_to(:user) }
   it { should belong_to(:contactable) }
 
   # Validations

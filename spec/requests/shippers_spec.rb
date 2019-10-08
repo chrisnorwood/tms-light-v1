@@ -2,7 +2,8 @@ require 'rails_helper'
 
 RSpec.describe 'Shippers API', type: :request do
   # initialize test data
-  let!(:shippers) { create_list(:shipper, 10) }
+  let(:user) { create(:user) }
+  let!(:shippers) { create_list(:shipper, 10, user: user) }
   let(:shipper_id) { shippers.first.id }
 
   # Test suite for GET /api/v1/shippers
@@ -53,7 +54,7 @@ RSpec.describe 'Shippers API', type: :request do
   # Test suite for POST /api/v1/shippers
   describe 'POST /api/v1/shippers' do
     # valid payload
-    let(:valid_attributes) { {shipper: { company_name: 'Company, Inc.', notes: 'Lorem ipsum and such' }} }
+    let(:valid_attributes) { {shipper: { company_name: 'Company, Inc.', notes: 'Lorem ipsum and such', user_id: user.id }} }
 
     context 'when the request is valid' do
       before { post '/api/v1/shippers', params: valid_attributes }
@@ -68,7 +69,7 @@ RSpec.describe 'Shippers API', type: :request do
     end
 
     context 'when the request is invalid' do
-      before { post '/api/v1/shippers', params: { shipper: { company_name: '' }} }
+      before { post '/api/v1/shippers', params: { shipper: { company_name: '', user_id: user.id }} }
 
       it 'returns status code 422' do
         expect(response).to have_http_status(422)

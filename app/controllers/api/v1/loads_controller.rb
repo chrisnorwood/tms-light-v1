@@ -49,7 +49,7 @@ module Api::V1
 
       # Only allow a trusted parameter "white list" through.
       def load_params
-        params.require(:load).permit(:origin, :destination, :pick_up, :delivery, :weight, :dims, :equipment, :notes, :amt_charged, :amt_paid, :complete, :shipper_id, :carrier_id)
+        params.require(:load).permit(:origin, :destination, :pick_up, :delivery, :weight, :dims, :equipment, :notes, :amt_charged, :amt_paid, :complete, :shipper_id, :carrier_id, :user_id)
       end
   end
 end

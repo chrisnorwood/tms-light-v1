@@ -5,6 +5,7 @@ FactoryBot.define do
     email { Faker::Internet.email }
     notes { Faker::TvShows::BojackHorseman.quote }
     for_shipper
+    user
 
     trait :for_load do
       association(:contactable, factory: :load)
@@ -25,6 +26,7 @@ FactoryBot.define do
     email { Faker::Internet.email }
     notes { Faker::TvShows::BojackHorseman.quote }
     contactable { |c| c.association(:shipper) }
+    user
   end
 
   factory :carrier_contact do
@@ -33,6 +35,7 @@ FactoryBot.define do
     email { Faker::Internet.email }
     notes { Faker::TvShows::BojackHorseman.quote }
     contactable { |c| c.association(:carrier) }
+    user
   end
 
   factory :load_contact do
@@ -41,5 +44,6 @@ FactoryBot.define do
     email { Faker::Internet.email }
     notes { Faker::TvShows::BojackHorseman.quote }
     contactable { |c| c.association(:load) }
+    user
   end
 end

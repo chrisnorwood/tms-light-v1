@@ -8,17 +8,28 @@
 
 require 'faker'
 
+1.times do
+  User.create(
+    name: 'Test User',
+    email: 'foo@bar.com',
+    password: 'foobar',
+    password_confirmation: 'foobar'
+  )
+end
+
 5.times do
   Carrier.create(
     company_name: Faker::Company.name,
-    notes: Faker::TvShows::BojackHorseman.quote
+    notes: Faker::TvShows::BojackHorseman.quote,
+    user_id: 1
   )  
 end
 
 5.times do
   Shipper.create(
     company_name: Faker::Company.name,
-    notes: Faker::TvShows::BojackHorseman.quote
+    notes: Faker::TvShows::BojackHorseman.quote,
+    user_id: 1
   )  
 end
 
@@ -36,7 +47,8 @@ end
     shipper_id: Random.new.rand(1..5),
     amt_charged: Random.new.rand(1750..2200).round(-2),
     amt_paid: Random.new.rand(500..1500).round(-2),
-    complete: false
+    complete: false,
+    user_id: 1
   )
 end
 
@@ -46,7 +58,8 @@ end
     phone: Faker::PhoneNumber.phone_number,
     email: Faker::Internet.email,
     notes: Faker::TvShows::BojackHorseman.quote,
-    contactable: Shipper.order('RANDOM()').first 
+    contactable: Shipper.order('RANDOM()').first,
+    user_id: 1
   )  
 end
 
@@ -56,6 +69,7 @@ end
     phone: Faker::PhoneNumber.phone_number,
     email: Faker::Internet.email,
     notes: Faker::TvShows::BojackHorseman.quote,
-    contactable: Carrier.order('RANDOM()').first
+    contactable: Carrier.order('RANDOM()').first,
+    user_id: 1
   )  
 end
