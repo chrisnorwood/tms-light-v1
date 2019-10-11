@@ -8,6 +8,7 @@ Rails.application.routes.draw do
 
       post 'auth/login', to: 'authentication#authenticate'
       post 'signup', to: 'users#create'
+      get 'current_user', to: 'users#profile'
     end
   end
 end
