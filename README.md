@@ -12,3 +12,6 @@
 
 ## Deploying for Production
 * must create ENV variable for SECRET_KEY_BASE in order for JWT to function properly
+
+# Todo
+* ensure css lump is minizmized upon production deploy
