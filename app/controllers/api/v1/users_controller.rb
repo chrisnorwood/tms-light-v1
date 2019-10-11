@@ -12,6 +12,11 @@ module Api::V1
       json_response(response, :created)
     end
 
+    def profile
+      user_profile = {user: { id: current_user.id, name: current_user.name, email: current_user.email }}
+      json_response(user_profile)
+    end
+
     private
 
     def user_params
