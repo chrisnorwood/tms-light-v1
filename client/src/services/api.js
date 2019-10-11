@@ -1,4 +1,4 @@
-import axios from 'axios'
+import ky from 'ky'
 
 export const baseUrl = '/api/v1/'
 export const loadsUrl = `${baseUrl}loads.json`
