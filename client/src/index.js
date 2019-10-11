@@ -6,6 +6,7 @@ import reducer from './reducers'
 import middleware from './middleware'
 import App from './components/App';
 import './styles/index.css'
+import './styles/custom.css'
 
 const store = createStore(reducer, middleware)
 
