@@ -21,14 +21,18 @@ class LoginPage extends Component {
     e.preventDefault()
     const { email, password } = this.state
     const credentials = {email, password}
-    this.props.dispatch(handleUserLogin(credentials))
+    this.props.dispatch(handleUserLogin(credentials, this.props.history))
+  }
+
+  isDisabled = () => {
+    const { email, password } = this.state
+
+    return email === '' || password === ''
   }
   
   render() {
     const { email, password } = this.state
     const { authError } = this.props
-
-    if (authError) { alert(authError) }
 
     return (
       <div className='bg-grey-lighter text-base text-grey-darkest font-normal relative h-screen'>
@@ -36,18 +40,17 @@ class LoginPage extends Component {
 
         <div className='container mx-auto p-8'>
           <div className='mx-auto max-w-sm'>
-            <div className='my-10 text-center'>
-              <div className='transparent'>
-                  Error in Here
-              </div>
-            </div> 
+            <div className='my-10 text-center'></div> 
 
             <div className='bg-white rounded shadow'>
               <div className='border-b border-grey py-8 font-bold text-black text-center text-xl tracking-widest uppercase'>
                 Welcome back!
               </div>
 
-              <form className='bg-grey-lightest px-10 py-10'>
+              <form
+                className='bg-grey-lightest px-10 py-10'
+                onSubmit={this.handleSubmit}
+              >
                 <div className='mb-3'>
                   <input
                     className='border border-grey w-full p-3'
@@ -70,8 +73,8 @@ class LoginPage extends Component {
                 </div>
                 <div className='flex'>
                   <button
-                    className='bg-primary hover:bg-primary-dark w-full p-4 text-sm text-white uppercase font-bold tracking-wider'
-                    onClick={this.handleSubmit}
+                    className='bg-primary w-full p-4 text-sm text-white uppercase font-bold tracking-wider hover:bg-primary-dark'
+                    type='submit'
                   >
                     Login
                   </button>

@@ -8,7 +8,18 @@ import App from './components/App';
 import './styles/index.css'
 import './styles/custom.css'
 
+// For below logic on token checking
+import { handleReAuth } from './actions/auth';
+
 const store = createStore(reducer, middleware)
+
+// Check if auth token already exists
+const token = localStorage.getItem('token');
+
+if(token) {
+  store.dispatch(handleReAuth(token));
+}
+
 
 ReactDOM.render(
   <Provider store={store}>

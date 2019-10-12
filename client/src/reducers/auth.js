@@ -21,7 +21,7 @@ export default function auth(state = initialState, action) {
     case SET_AUTH_ERROR :
       return {
         ...state,
-        error: action.payload,
+        error: action.payload.error,
       }
     default:
       return state
