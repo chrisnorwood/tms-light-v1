@@ -17,9 +17,9 @@ const store = createStore(reducer, middleware)
 const token = localStorage.getItem('token');
 
 if(token) {
+  console.log('ReAuth - should only happen once')
   store.dispatch(handleReAuth(token));
 }
-
 
 ReactDOM.render(
   <Provider store={store}>
