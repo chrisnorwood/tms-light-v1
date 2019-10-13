@@ -35,6 +35,9 @@ module.exports = {
       '10': '2.5rem',
     },
   },
-  variants: {},
+  variants: {
+    opacity: ['responsive', 'hover', 'focus', 'disabled'],
+    cursor: ['responsive', 'hover', 'focus', 'disabled'],
+  },
   plugins: []
 }

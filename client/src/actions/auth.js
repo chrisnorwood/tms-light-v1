@@ -62,7 +62,7 @@ export function handleSignOut () {
   }
 }
 
-export function handleUserLogin (credentials, history) {
+export function handleUserLogin (credentials, history, setFormikSubmitting = null) {
   return (dispatch) => {
     dispatch(setAuthError(null))
 
@@ -85,6 +85,8 @@ export function handleUserLogin (credentials, history) {
         toast.error('Invalid email or password.', { position: 'top-center'})
         // Set error in store
         dispatch(setAuthError('Invalid email or password.'))
+        // If Formik Form passed in callback, then reset our form upon error
+        if (setFormikSubmitting) setFormikSubmitting(false)
       })
   }
 }
