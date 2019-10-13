@@ -1,4 +1,4 @@
-import { loginUser, getCurrentUser } from '../services/api'
+import { loginUser, getCurrentUser, signupUser } from '../services/api'
 import { toast } from 'react-toastify'
 
 export const SET_AUTHED_USER = 'SET_AUTHED_USER' 
@@ -37,18 +37,23 @@ function setAuthError (error) {
 
 export function handleReAuth (token) {
   return (dispatch) => {
-    getCurrentUser(token)
-    .then(res => res.json())
-    .then(userObject => {
-      console.log('I found an existing session/token', userObject)
-      dispatch(setAuthedUser(userObject.user))
-      dispatch(setToken(token))
-    })
-    .catch(error => {
-      console.log('Error while fetching current user from token.')
-      // Signs user out if their token is invalid upon application mount
+    if (localStorage.getItem('token')) {
+      getCurrentUser(token)
+      .then(res => res.json())
+      .then(userObject => {
+        console.log('I found a user by token', userObject)
+        dispatch(setAuthedUser(userObject.user))
+        dispatch(setToken(token))
+      })
+      .catch(error => {
+        console.log('Error while fetching current user from token.')
+        // Signs user out if their token is invalid upon application mount
+        dispatch(handleLogout())
+      })
+    } else {
       dispatch(handleLogout())
-    })
+    }
+
   }
 }
 
@@ -59,6 +64,7 @@ export function handleLogout () {
     localStorage.clear()
     dispatch(setToken(null))
     dispatch(setAuthedUser(null))
+    console.log('Logout successful.')
   }
 }
 
@@ -85,6 +91,42 @@ export function handleUserLogin (credentials, history, setFormikSubmitting = nul
         toast.error('Invalid email or password.', { position: 'top-center'})
         // Set error in store
         dispatch(setAuthError('Invalid email or password.'))
+        // If Formik Form passed in callback, then reset our form upon error
+        if (setFormikSubmitting) setFormikSubmitting(false)
+      })
+  }
+}
+
+export function handleUserSignup (values, history, setFormikSubmitting = null) {
+  return (dispatch) => {
+    const { name, email, password, confirmation } = values
+    const userObject = {
+      user: {
+        name,
+        email,
+        password,
+        password_confirmation: confirmation,
+      }
+    }
+
+    signupUser(userObject)
+      .then(res => res.json())
+      .then(signupResponse => {
+        console.log('Signup sucess')
+        // Set Token in Local Storage
+        localStorage.setItem('token', signupResponse.auth_token);
+        // Set authedUser and token in store
+        dispatch(setAuthedUser(signupResponse.user))
+        dispatch(setToken(signupResponse.auth_token))
+        // Pop a Toastie
+        toast.success(signupResponse.message, { position: 'top-center'})
+        // Redirect to Dashboard
+        history.push('/dash')
+      })
+      .catch(error => {
+        console.log('Signup failed', error)
+        // This is hacky, and should actually log the error but I can't figure out how to read the message
+        toast.error('Email has already been taken.', { position: 'top-center'})
         // If Formik Form passed in callback, then reset our form upon error
         if (setFormikSubmitting) setFormikSubmitting(false)
       })

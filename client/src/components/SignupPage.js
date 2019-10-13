@@ -2,16 +2,14 @@ import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { Formik, Form, Field, ErrorMessage } from 'formik'
-import { handleUserLogin } from '../actions/auth'
+import { handleUserSignup } from '../actions/auth'
 
-class LoginPage extends Component {
+class RegisterPage extends Component {
   handleSubmit = (values, setSubmitting) => {
-    const { email, password } = values
-    const credentials = {email, password}
     // Pass credentials to API via action,
     // history in case success can redirect,
     // Formik setSubmitting for callback in case of error
-    this.props.dispatch(handleUserLogin(credentials, this.props.history, setSubmitting))
+    this.props.dispatch(handleUserSignup(values, this.props.history, setSubmitting))
   }
 
   render() {
@@ -27,15 +25,17 @@ class LoginPage extends Component {
 
             <div className='bg-white rounded shadow'>
               <div className='border-b border-grey py-8 font-bold text-black text-center text-xl tracking-widest uppercase'>
-                Welcome back!
+                Create New Account
               </div>
               
               <Formik
-                initialValues={{email: '', password: ''}}
+                initialValues={{name: '', email: '', password: '', confirmation: ''}}
                 validate={values => {
                   const errors = {};
+                  if (!values.name) errors.name = 'Required'
                   if (!values.email) errors.email = 'Required'
                   if (!values.password) errors.password = 'Required'
+                  if (values.confirmation !== values.password) errors.confirmation = 'Password and confirmation must match.'
                   return errors
                 }}
                 onSubmit={(values, { setSubmitting }) => {
@@ -44,6 +44,15 @@ class LoginPage extends Component {
                 }}
                 render={({ errors, touched, isSubmitting }) => (
                   <Form className='bg-grey-lightest px-10 py-10'>
+                    <div className='mb-3'>
+                      <Field
+                        className={`border w-full p-3 ${errors.name && touched.name ? 'border-red-600' : 'border-grey'}`}
+                        type='text'
+                        name='name'
+                        placeholder='Name'
+                      />
+                      <ErrorMessage name='name' component='div' className='ml-4 mt-2 text-red-600 text-xs' /> 
+                    </div>
                     <div className='mb-3'>
                       <Field
                         className={`border w-full p-3 ${errors.email && touched.email ? 'border-red-600' : 'border-grey'}`}
@@ -58,9 +67,18 @@ class LoginPage extends Component {
                         className={`border w-full p-3 ${errors.password && touched.password ? 'border-red-600' : 'border-grey'}`}
                         type='password'
                         name='password'
-                        placeholder='**************'
+                        placeholder='Password'
                       />
                       <ErrorMessage name='password' component='div' className='ml-4 mt-2 text-red-600 text-xs' /> 
+                    </div>
+                    <div className='mb-3'>
+                      <Field
+                        className={`border w-full p-3 ${errors.confirmation && touched.confirmation ? 'border-red-600' : 'border-grey'}`}
+                        type='password'
+                        name='confirmation'
+                        placeholder='Confirm password'
+                      />
+                      <ErrorMessage name='confirmation' component='div' className='ml-4 mt-2 text-red-600 text-xs' /> 
                     </div>
                     <div className='flex'>
                       <button
@@ -68,7 +86,7 @@ class LoginPage extends Component {
                         type='submit'
                         disabled={isSubmitting}
                       >
-                        Login
+                        Sign Up
                       </button>
                     </div>
                   </Form>
@@ -79,9 +97,9 @@ class LoginPage extends Component {
                 <div className='flex justify-around'>
                   <Link
                     className='font-bold text-primary hover:text-primary-dark no-underline'
-                    to='/signup'
+                    to='/login'
                   >
-                    Don't have an account?
+                    Already have an account?
                   </Link>
                 </div>
               </div>
@@ -93,10 +111,4 @@ class LoginPage extends Component {
   }
 }
 
-function mapStateToProps({ auth }) {
-  return {
-    authError: auth.error,
-  }
-}
-
-export default connect(mapStateToProps)(LoginPage)
+export default connect()(RegisterPage)

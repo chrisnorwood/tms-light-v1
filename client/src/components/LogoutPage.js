@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import { handleLogout } from '../actions/auth'
 
 class LogoutPage extends Component {
-  componentWillMount() {
+  componentDidMount() {
     this.props.dispatch(handleLogout())
     this.props.history.push('/login')
   }

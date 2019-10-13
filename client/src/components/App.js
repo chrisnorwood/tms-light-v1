@@ -5,6 +5,7 @@ import 'react-toastify/dist/ReactToastify.css'
 import PrivateRoute from './hoc/PrivateRoute'
 import PublicRoute from './hoc/PublicRoute'
 import LoginPage from './LoginPage'
+import SignupPage from './SignupPage'
 import LogoutPage from './LogoutPage'
 import Dashboard from './Dashboard'
 
@@ -14,6 +15,7 @@ class App extends Component {
       <Fragment>
         <Router>
           <PublicRoute path='/login' restricted={true} component={LoginPage} />
+          <PublicRoute path='/signup' restricted={true} component={SignupPage} />
           <PrivateRoute path='/logout' component={LogoutPage} />
           <PrivateRoute path='/dash' component={Dashboard} />
         </Router>
