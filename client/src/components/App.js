@@ -1,7 +1,9 @@
 import React, { Component, Fragment } from 'react';
-import { BrowserRouter as Router, Route, Redirect } from 'react-router-dom'
+import { BrowserRouter as Router } from 'react-router-dom'
 import { ToastContainer } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
+import PrivateRoute from './hoc/PrivateRoute'
+import PublicRoute from './hoc/PublicRoute'
 import LoginPage from './LoginPage'
 import Dashboard from './Dashboard'
 
@@ -10,11 +12,8 @@ class App extends Component {
     return (
       <Fragment>
         <Router>
-          <Route path='/' exact render={() => (
-            <Redirect to='/login' />
-          )}/>
-          <Route path='/login' component={LoginPage} />
-          <Route path='/dash' component={Dashboard} />
+          <PublicRoute path='/login' restricted={true} component={LoginPage} />
+          <PrivateRoute path='/dash' component={Dashboard} />
         </Router>
         <ToastContainer autoClose={3000} />
       </Fragment>

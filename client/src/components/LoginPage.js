@@ -39,12 +39,10 @@ class LoginPage extends Component {
                   return errors
                 }}
                 onSubmit={(values, { setSubmitting }) => {
-                  // This is where you could wire up axios or superagent
-                  console.log("Submitted Values:", values);
                   // Passes values to submit handler, passes submitting for purposes of calling in action
                   this.handleSubmit(values, setSubmitting)
                 }}
-                render={({ errors, status, touched, isSubmitting }) => (
+                render={({ errors, touched, isSubmitting }) => (
                   <Form className='bg-grey-lightest px-10 py-10'>
                     <div className='mb-3'>
                       <Field
