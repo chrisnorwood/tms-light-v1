@@ -47,14 +47,14 @@ export function handleReAuth (token) {
     .catch(error => {
       console.log('Error while fetching current user from token.')
       // Signs user out if their token is invalid upon application mount
-      dispatch(handleSignOut())
+      dispatch(handleLogout())
     })
   }
 }
 
 // does this work correctly?
 // It certainly appears so, though there may be more edge cases where needed
-export function handleSignOut () {
+export function handleLogout () {
   return (dispatch) => {
     localStorage.clear()
     dispatch(setToken(null))
