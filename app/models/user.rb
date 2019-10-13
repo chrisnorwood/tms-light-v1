@@ -5,5 +5,8 @@ class User < ApplicationRecord
   has_many :shippers
   has_many :loads
 
-  validates_presence_of :name, :email, :password_digest
+  before_save { self.email = email.downcase }
+
+  validates_presence_of :name, :email, :password, :password_confirmation
+  validates :email, uniqueness: { case_sensitive: false }
 end
