@@ -5,7 +5,7 @@ import { Provider } from 'react-redux'
 import reducer from './reducers'
 import middleware from './middleware'
 import App from './components/App';
-import './styles/index.css'
+import './styles/tailwind.css'
 import './styles/custom.css'
 
 // For below logic on token checking
