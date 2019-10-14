@@ -11,6 +11,10 @@ import Dashboard from './Dashboard'
 import LoadsPage from './LoadsPage'
 
 class App extends Component {
+  componentDidMount() {
+    console.log('App did mount.')
+  }
+  
   render() {
     return (
       <Fragment>

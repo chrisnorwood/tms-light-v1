@@ -1,4 +1,5 @@
 import { loginUser, getCurrentUser, signupUser } from '../services/api'
+import { handleGetInitialData } from './shared'
 import { toast } from 'react-toastify'
 
 export const SET_AUTHED_USER = 'SET_AUTHED_USER' 
@@ -38,12 +39,14 @@ function setAuthError (error) {
 export function handleReAuth (token) {
   return (dispatch) => {
     if (localStorage.getItem('token')) {
-      getCurrentUser(token)
+      return getCurrentUser(token)
       .then(res => res.json())
       .then(userObject => {
         console.log('I found a user by token', userObject)
         dispatch(setAuthedUser(userObject.user))
         dispatch(setToken(token))
+        // Get Initial Data upon 'resigning' in
+        dispatch(handleGetInitialData())
       })
       .catch(error => {
         console.log('Error while fetching current user from token.')
@@ -72,7 +75,7 @@ export function handleUserLogin (credentials, history, setFormikSubmitting = nul
   return (dispatch) => {
     dispatch(setAuthError(null))
 
-    loginUser(credentials)
+    return loginUser(credentials)
       .then(res => res.json())
       .then(authObject => {
         const { auth_token: token, user } = authObject
@@ -82,6 +85,8 @@ export function handleUserLogin (credentials, history, setFormikSubmitting = nul
         // Set authedUser and token in store
         dispatch(setAuthedUser(user))
         dispatch(setToken(token))
+        // Get all initial data necessary for app
+        dispatch(handleGetInitialData(token))
         // Redirect to Dashboard
         history.push('/dash')
       })

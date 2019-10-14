@@ -5,8 +5,15 @@ export const loginUrl = `${baseUrl}/auth/login`
 export const signupUrl = `${baseUrl}/signup`
 
 // Protected
+let storedToken = localStorage.getItem('token')
+
 export const profileUrl = `${baseUrl}/current_user`
 export const loadsUrl = `${baseUrl}/loads`
+export const contactsUrl = `${baseUrl}/contacts`
+export const shippersUrl = `${baseUrl}/shippers`
+export const carriersUrl = `${baseUrl}/carriers`
+
+// Auth/User Calls
 
 export const loginUser = async (credentials) => {
   const result = await ky.post(loginUrl, { json: credentials })
@@ -26,11 +33,52 @@ export const signupUser = async (userObject) => {
   
   return result
 }
-// export const getLoads = async () => {
-//   Commented Out Until Auth Complete
-//   Consider switch from axios to Ky
-//   const result = await axios.get(loadsUrl)
-//     .then(({ data }) => data)
 
-//   return result
-// }
+// Get All Initial Data
+// (this function returns promise with actual data in it)
+// in format of { loads: [], contacts: [] }
+export const getInitialData = (token) => {
+  return Promise.all([
+    getLoads(token),
+    getContacts(token),
+    getShippers(token),
+    getCarriers(token),
+  ])
+  .then(result => Promise.all(result.map(dataType => dataType.json())))
+  .then(([ loads, contacts, shippers, carriers ]) => ({
+    loads,
+    contacts,
+    shippers,
+    carriers,
+  }))
+}
+
+// Loads
+// (these functions return promises)
+export const getLoads = async (token = storedToken) => {
+  const result = await ky.get(loadsUrl, { headers: { authorization: `Bearer ${token}`}})
+
+  return result
+}
+
+// Contacts
+export const getContacts = async (token = storedToken) => {
+  const result = await ky.get(contactsUrl, { headers: { authorization: `Bearer ${token}`}})
+
+  return result
+}
+
+// Shippers
+
+export const getShippers = async (token = storedToken) => {
+  const result = await ky.get(shippersUrl, { headers: { authorization: `Bearer ${token}`}})
+
+  return result
+}
+
+// Carriers
+export const getCarriers = async (token = storedToken) => {
+  const result = await ky.get(carriersUrl, { headers: { authorization: `Bearer ${token}`}})
+
+  return result
+}

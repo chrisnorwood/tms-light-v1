@@ -21,6 +21,9 @@
 * better error handling in auth actions
 * There is some race condition getting weird between my reAuth on index.js and manual type of /logout route
 * Test my API User model/controller a bit more (validations + no same user)
+* Look at the hacky way I'm using token in AUTH ACTION handleUserLogin() => shared action handleGetInitialData() => api getInitialData() => individual API calls
+* * I wanted to pull it straight from local storage in the API service library, but that doesn't work with the asynchronous nature of the signin
+* * This means I'm going to have to pass a token in for every request as such, or they will fail unless the page was mounted on a refresh due to the handle reAuth being able to call from token directly
 
 ## Resources
 * Initial project created similar in structure to the Heroku & Bruno B. tutorial
