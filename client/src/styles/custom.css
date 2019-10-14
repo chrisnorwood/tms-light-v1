@@ -16,3 +16,23 @@ html {
   text-transform: uppercase;
   letter-spacing: 0.1em;
 }
+
+.sidebar-nav .nav-link {
+  padding-left: 1rem;
+  padding-right: 1rem;
+  padding-top: 1.5rem;
+  padding-bottom: 1.5rem;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.sidebar-nav .nav-link:hover {
+  background-color: #adb4c2;
+  color: #2B4964;
+}
+
+.sidebar-nav .active {
+  background-color: #adb4c2;
+  color: #2B4964;
+}

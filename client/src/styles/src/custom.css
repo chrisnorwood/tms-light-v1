@@ -16,3 +16,15 @@ html {
 .sidebar-nav {
   @apply uppercase tracking-widest;
 }
+
+.sidebar-nav .nav-link {
+  @apply px-4 py-6 flex justify-start items-center;
+}
+
+.sidebar-nav .nav-link:hover {
+  @apply bg-grey-dark text-black;
+}
+
+.sidebar-nav .active {
+  @apply bg-grey-dark text-black;
+}

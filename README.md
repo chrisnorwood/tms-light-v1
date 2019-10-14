@@ -11,12 +11,16 @@
 ## Deploying for Production
 * must create ENV variable for SECRET_KEY_BASE in order for JWT to function properly
 
+## Misc. Notes
+* Due to some limitations with Tailwind/PostCSS + create-react-app, modify CSS in /client/src/styles/src/ folder (they will compile to /client/src/styles/ root)
+
 ## Todo
 * ensure css lump is minizmized upon production deploy
 * consider changing Private/PublicRoute's auth check to come from auth on state (which will ONLY set when valid token) rather than local storage (initially having trouble due to async nature of the state setting)
 * Figure out how to properly route the catch all or '/' redirect to login appropriately with my Route HOCs
 * better error handling in auth actions
 * There is some race condition getting weird between my reAuth on index.js and manual type of /logout route
+* Test my API User model/controller a bit more (validations + no same user)
 
 ## Resources
 * Initial project created similar in structure to the Heroku & Bruno B. tutorial
