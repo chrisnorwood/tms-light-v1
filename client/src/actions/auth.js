@@ -76,7 +76,6 @@ export function handleUserLogin (credentials, history, setFormikSubmitting = nul
     dispatch(setAuthError(null))
 
     return loginUser(credentials)
-      .then(res => res.json())
       .then(authObject => {
         const { auth_token: token, user } = authObject
         console.log('Login Success')
@@ -115,7 +114,6 @@ export function handleUserSignup (values, history, setFormikSubmitting = null) {
     }
 
     signupUser(userObject)
-      .then(res => res.json())
       .then(signupResponse => {
         console.log('Signup sucess')
         // Set Token in Local Storage
@@ -125,6 +123,8 @@ export function handleUserSignup (values, history, setFormikSubmitting = null) {
         dispatch(setToken(signupResponse.auth_token))
         // Pop a Toastie
         toast.success(signupResponse.message, { position: 'top-center'})
+        // Get all initial data necessary for app
+        dispatch(handleGetInitialData(signupResponse.auth_token))
         // Redirect to Dashboard
         history.push('/dash')
       })

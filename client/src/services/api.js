@@ -16,7 +16,7 @@ export const carriersUrl = `${baseUrl}/carriers`
 // Auth/User Calls
 
 export const loginUser = async (credentials) => {
-  const result = await ky.post(loginUrl, { json: credentials })
+  const result = await ky.post(loginUrl, { json: credentials }).then(res => res.json())
   
   return result
 }
@@ -29,7 +29,7 @@ export const getCurrentUser = async (token) => {
 
 export const signupUser = async (userObject) => {
   // Takes in user in appropriate format: { user: { name, email, password, password_confirmation }}
-  const result = await ky.post(signupUrl, { json: userObject })
+  const result = await ky.post(signupUrl, { json: userObject }).then(res => res.json())
   
   return result
 }
