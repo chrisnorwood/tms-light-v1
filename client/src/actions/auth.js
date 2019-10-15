@@ -87,7 +87,7 @@ export function handleUserLogin (credentials, history, setFormikSubmitting = nul
         // Get all initial data necessary for app
         dispatch(handleGetInitialData())
         // Redirect to Dashboard
-        history.push('/dash')
+        history.push('/app')
       })
       .catch(error => {
         console.log('Login failed')
@@ -126,7 +126,7 @@ export function handleUserSignup (values, history, setFormikSubmitting = null) {
         // Get all initial data necessary for app
         dispatch(handleGetInitialData())
         // Redirect to Dashboard
-        history.push('/dash')
+        history.push('/app')
       })
       .catch(error => {
         console.log('Signup failed', error)

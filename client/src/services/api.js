@@ -5,7 +5,6 @@ export const loginUrl = `${baseUrl}/auth/login`
 export const signupUrl = `${baseUrl}/signup`
 
 // Protected
-let storedToken = localStorage.getItem('token')
 
 export const profileUrl = `${baseUrl}/current_user`
 export const loadsUrl = `${baseUrl}/loads`
@@ -51,7 +50,6 @@ const createHeaders = () => {
 // (this function returns promise with actual data in it)
 // in format of { loads: [], contacts: [] }
 export const getInitialData = () => {
-  const token = getToken();
 
   return Promise.all([
     getLoads(),

@@ -7,9 +7,9 @@ import { receiveCarriers } from './carriers'
 
 // Thunk
 
-export const handleGetInitialData = (token) => {
+export const handleGetInitialData = () => {
   return (dispatch) => {
-    return getInitialData(token)
+    return getInitialData()
       .then(({ loads, contacts, shippers, carriers }) => {
         dispatch(receiveLoads(loads))
         dispatch(receiveContacts(contacts))

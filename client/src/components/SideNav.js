@@ -11,7 +11,8 @@ const SideNav = () => {
       <ul className='sidebar-nav'>
         <li>
           <NavLink
-            to='/dash'
+            exact
+            to='/app'
             className='nav-link'
           >
             <FaHome className='menu-icon'/>
@@ -20,7 +21,8 @@ const SideNav = () => {
         </li>
         <li>
           <NavLink
-            to='/loads'
+            exact
+            to='/app/loads'
             className='nav-link'
           >
             <FaTruckLoading className='menu-icon'/>
@@ -29,7 +31,8 @@ const SideNav = () => {
         </li>
         <li>
           <NavLink
-            to='/contacts'
+            exact
+            to='/app/contacts'
             className='nav-link'
           >
             <FaAddressBook className='menu-icon'/>
@@ -38,7 +41,8 @@ const SideNav = () => {
         </li>
         <li>
           <NavLink
-            to='/shippers'
+            exact
+            to='/app/shippers'
             className='nav-link'
           >
             <FaBriefcase className='menu-icon'/>
@@ -47,7 +51,8 @@ const SideNav = () => {
         </li>
         <li>
           <NavLink
-            to='/carriers'
+            exact
+            to='/app/carriers'
             className='nav-link'
           >
             <FaTruck className='menu-icon'/>
@@ -56,6 +61,7 @@ const SideNav = () => {
         </li>
         <li>
           <NavLink
+            exact
             to='/logout'
             className='nav-link'
           >

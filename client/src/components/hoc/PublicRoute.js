@@ -14,7 +14,7 @@ const PublicRoute = ({ component: Component, restricted, ...rest }) => {
     // Otherwise redirect to /login
     <Route {...rest} render={props => (
       tokenExists() && restricted
-        ? <Redirect to='/dash' />
+        ? <Redirect to='/app' />
         : <Component {...props} />
     )}/>
   )
