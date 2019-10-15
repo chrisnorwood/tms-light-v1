@@ -10,11 +10,7 @@ import LogoutPage from './LogoutPage'
 import Dashboard from './Dashboard'
 import LoadsPage from './LoadsPage'
 
-class App extends Component {
-  componentDidMount() {
-    console.log('App did mount.')
-  }
-  
+class App extends Component {  
   render() {
     return (
       <Fragment>

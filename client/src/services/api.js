@@ -34,15 +34,30 @@ export const signupUser = async (userObject) => {
   return result
 }
 
+// Gets Token from Local Storage
+const getToken = () => {
+  return localStorage.getItem('token')
+}
+
+const createHeaders = () => {
+  return {
+    headers: {
+      authorization: `Bearer ${getToken()}`
+    }
+  }
+}
+
 // Get All Initial Data
 // (this function returns promise with actual data in it)
 // in format of { loads: [], contacts: [] }
-export const getInitialData = (token) => {
+export const getInitialData = () => {
+  const token = getToken();
+
   return Promise.all([
-    getLoads(token),
-    getContacts(token),
-    getShippers(token),
-    getCarriers(token),
+    getLoads(),
+    getContacts(),
+    getShippers(),
+    getCarriers(),
   ])
   .then(result => Promise.all(result.map(dataType => dataType.json())))
   .then(([ loads, contacts, shippers, carriers ]) => ({
@@ -55,30 +70,30 @@ export const getInitialData = (token) => {
 
 // Loads
 // (these functions return promises)
-export const getLoads = async (token = storedToken) => {
-  const result = await ky.get(loadsUrl, { headers: { authorization: `Bearer ${token}`}})
+export const getLoads = async () => {
+  const result = await ky.get(loadsUrl, createHeaders())
 
   return result
 }
 
 // Contacts
-export const getContacts = async (token = storedToken) => {
-  const result = await ky.get(contactsUrl, { headers: { authorization: `Bearer ${token}`}})
+export const getContacts = async () => {
+  const result = await ky.get(contactsUrl, createHeaders())
 
   return result
 }
 
 // Shippers
 
-export const getShippers = async (token = storedToken) => {
-  const result = await ky.get(shippersUrl, { headers: { authorization: `Bearer ${token}`}})
+export const getShippers = async () => {
+  const result = await ky.get(shippersUrl, createHeaders())
 
   return result
 }
 
 // Carriers
-export const getCarriers = async (token = storedToken) => {
-  const result = await ky.get(carriersUrl, { headers: { authorization: `Bearer ${token}`}})
+export const getCarriers = async () => {
+  const result = await ky.get(carriersUrl, createHeaders())
 
   return result
 }

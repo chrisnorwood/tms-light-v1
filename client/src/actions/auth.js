@@ -85,7 +85,7 @@ export function handleUserLogin (credentials, history, setFormikSubmitting = nul
         dispatch(setAuthedUser(user))
         dispatch(setToken(token))
         // Get all initial data necessary for app
-        dispatch(handleGetInitialData(token))
+        dispatch(handleGetInitialData())
         // Redirect to Dashboard
         history.push('/dash')
       })
@@ -124,7 +124,7 @@ export function handleUserSignup (values, history, setFormikSubmitting = null) {
         // Pop a Toastie
         toast.success(signupResponse.message, { position: 'top-center'})
         // Get all initial data necessary for app
-        dispatch(handleGetInitialData(signupResponse.auth_token))
+        dispatch(handleGetInitialData())
         // Redirect to Dashboard
         history.push('/dash')
       })
