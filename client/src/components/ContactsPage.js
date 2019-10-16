@@ -1,16 +1,46 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
+import ReactTable from 'react-table'
 
 class ContactsPage extends Component {
-  state = {
-
-  }
 
   render() {
     const { contacts } = this.props
+    const contactsArray = Object.values(contacts)
+    const columns = [
+      {
+        Header: 'Contacts',
+        columns: [
+          {
+            Header: 'Name',
+            accessor: 'name',
+          },
+          {
+            Header: 'Phone',
+            accessor: 'phone',
+          },
+          {
+            Header: 'Email',
+            accessor: 'email',
+          },
+          {
+            Header: 'Type',
+            accessor: 'contactable_type',
+          },
+        ]
+      }
+    ]
 
     return (
       <div className='bg-white shadow-xl rounded-lg rounded-lg w-full p-6'>
+        <div>
+          <ReactTable
+            data={contactsArray}
+            columns={columns}
+            className='-striped -highlight'
+          />
+        </div>
+        <br /> <br />
         <table className='text-left w-full'>
           <thead className='text-black'>
             <tr>
@@ -42,7 +72,7 @@ class ContactsPage extends Component {
           </tbody>
         </table>
         <pre>
-          {/* {JSON.stringify(contacts, null, 2)} */}
+          {JSON.stringify(contacts, null, 2)}
         </pre>
       </div>
     )

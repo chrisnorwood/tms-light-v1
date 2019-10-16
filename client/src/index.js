@@ -7,6 +7,7 @@ import middleware from './middleware'
 import App from './components/App'
 import './styles/tailwind.css'
 import './styles/custom.css'
+import 'react-table/react-table.css'
 
 // For below logic on token checking
 import { handleReAuth } from './actions/auth'

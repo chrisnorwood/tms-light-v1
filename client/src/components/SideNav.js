@@ -5,7 +5,7 @@ import { FaBriefcase, FaTruck, FaAddressBook, FaTruckLoading, FaSignOutAlt, FaHo
 const SideNav = () => {
   return (
     <div className='fixed w-56 min-h-screen text-grey-darkest font-bold shadow-2xl bg-grey-light'>
-      <div className='py-4 text-center text-2xl border-b border-grey-dark'>
+      <div className='py-4 text-center text-2xl border-b border-grey-dark text-primary'>
         TMS
       </div>
       <ul className='sidebar-nav'>
