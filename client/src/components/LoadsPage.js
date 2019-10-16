@@ -4,7 +4,10 @@ import { connect } from 'react-redux'
 class LoadsPage extends Component {
   render() {
     return (
-      <h1 className='text-3xl border-b-2 border-grey-darkest'>Loads</h1>
+      <div>
+        <h1 className='text-3xl border-b-2 border-grey-darkest'>Loads</h1>
+      </div>
+      
     )
   }
 }

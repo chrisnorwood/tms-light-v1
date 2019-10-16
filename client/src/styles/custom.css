@@ -36,3 +36,53 @@ html {
   background-color: #adb4c2;
   color: #2B4964;
 }
+
+.new-item-btn {
+  background-color: #38a169;
+  border-radius: 9999px;
+  padding: 0.5rem;
+  margin-top: 0.75rem;
+  font-size: 0.875rem;
+  color: #ffffff;
+  text-transform: uppercase;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+}
+
+.new-item-btn:hover {
+  background-color: #2f855a;
+}
+
+.table-actions {
+  text-align: center;
+}
+
+.table-actions button {
+  margin-left: 0.5rem;
+  margin-right: 0.5rem;
+  font-size: 1.125rem;
+}
+
+.table-actions .view {
+  color: #2b79c1;
+}
+
+.table-actions .view:hover {
+  color: #266299;
+}
+
+.table-actions .edit {
+  color: #dd6b20;
+}
+
+.table-actions .edit:hover {
+  color: #c05621;
+}
+
+.table-actions .delete {
+  color: #c53030;
+}
+
+.table-actions .delete:hover {
+  color: #9b2c2c;
+}

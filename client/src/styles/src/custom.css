@@ -28,3 +28,43 @@ html {
 .sidebar-nav .active {
   @apply bg-grey-dark text-black;
 }
+
+.new-item-btn {
+  @apply bg-green-600 rounded-full p-2 mt-3 text-sm text-white uppercase font-bold tracking-wider;
+}
+
+.new-item-btn:hover {
+  @apply bg-green-700;
+}
+
+.table-actions {
+  @apply text-center;
+}
+
+.table-actions button {
+  @apply mx-2 text-lg;
+}
+
+.table-actions .view {
+  @apply text-primary;
+}
+
+.table-actions .view:hover {
+  @apply text-primary-dark;
+}
+
+.table-actions .edit {
+  @apply text-orange-600;
+}
+
+.table-actions .edit:hover {
+  @apply text-orange-700;
+}
+
+.table-actions .delete {
+  @apply text-red-700;
+}
+
+.table-actions .delete:hover {
+  @apply text-red-800;
+}

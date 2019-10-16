@@ -1,6 +1,8 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import ReactTable from 'react-table'
+import { FaEye, FaEdit, FaTrash, FaPlus } from 'react-icons/fa'
+import { caseInsensitiveFilter } from '../utils/tableHelpers'
 
 class ContactsPage extends Component {
 
@@ -10,70 +12,73 @@ class ContactsPage extends Component {
     const columns = [
       {
         Header: 'Contacts',
+        headerClassName: 'text-left bg-grey-dark text-black text-2xl tracking-wide',
         columns: [
           {
             Header: 'Name',
             accessor: 'name',
+            filterable: true,
+            headerClassName: 'bg-grey-light text-lg',
           },
           {
             Header: 'Phone',
             accessor: 'phone',
+            headerClassName: 'bg-grey-light text-lg',
           },
           {
             Header: 'Email',
             accessor: 'email',
+            headerClassName: 'bg-grey-light text-lg',
+          },
+          {
+            Header: 'Notes',
+            accessor: 'notes',
+            headerClassName: 'bg-grey-light text-lg',
           },
           {
             Header: 'Type',
             accessor: 'contactable_type',
+            headerClassName: 'bg-grey-light text-lg',
+            maxWidth: 100,
           },
+          {
+            Header: 'Actions',
+            headerClassName: 'bg-grey-light text-lg',
+            sortable: false,
+            filterable: false,
+            maxWidth: 150,
+            Cell: row => (
+              <div className='table-actions'>
+                <button className='view' onClick={() => console.log('View', row.original)}>
+                  <FaEye />
+                </button>
+                <button className='edit' onClick={() => console.log('Edit', row.original)}>
+                  <FaEdit />
+                </button>
+                <button className='delete' onClick={() => console.log('Delete', row.original)}>
+                  <FaTrash />
+                </button>
+              </div>
+            )
+          }
         ]
       }
     ]
 
     return (
       <div className='bg-white shadow-xl rounded-lg rounded-lg w-full p-6'>
-        <div>
-          <ReactTable
-            data={contactsArray}
-            columns={columns}
-            className='-striped -highlight'
-          />
+        <div className='flex mb-4 justify-end'>
+          <button className='new-item-btn'>
+              <span className='flex items-center'><FaPlus className='inline mr-1' /> New Contact</span>
+          </button>
         </div>
-        <br /> <br />
-        <table className='text-left w-full'>
-          <thead className='text-black'>
-            <tr>
-              <th className='text-2xl bg-grey-dark p-2' colSpan='6'>Contacts</th>
-            </tr>
-            <tr className='text-xl bg-grey-light border-b-2 border-black italic mb-8'>
-              <th className='p-2'>Name</th>
-              <th className='p-2'>Phone</th>
-              <th className='p-2'>Email</th>
-              <th className='p-2'>Type</th>
-              <th className='p-2'>Contactable ID</th>
-              <th className='p-2'></th>
-            </tr>
-          </thead>
-          <tbody className='text-lg'>
-            {Object.keys(contacts).map(i => (
-              <tr
-                key={contacts[i].id}
-                className='even:bg-grey-lighter'
-              >
-                <td className='p-2'>{contacts[i].name}</td>
-                <td className='p-2'>{contacts[i].phone}</td>
-                <td className='p-2'>{contacts[i].email}</td>
-                <td className='p-2'>{contacts[i].contactable_type}</td>
-                <td className='p-2'>{contacts[i].contactable_id}</td>
-                <th className='p-2'>options here</th>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-        <pre>
-          {JSON.stringify(contacts, null, 2)}
-        </pre>
+        <ReactTable
+          data={contactsArray}
+          columns={columns}
+          defaultPageSize={10}
+          defaultFilterMethod={caseInsensitiveFilter}
+          className='-striped -highlight'
+        />
       </div>
     )
   }
