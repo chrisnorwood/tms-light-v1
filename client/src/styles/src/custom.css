@@ -8,6 +8,8 @@ html {
   font-family: 'Lato', sans-serif;
 }
 
+/* Sidebar Menu */
+
 .menu-icon {
   font-size: 1.5em;
   margin-left: 0.5em;
@@ -28,6 +30,8 @@ html {
 .sidebar-nav .active {
   @apply bg-grey-dark text-black;
 }
+
+/* Table Styling */
 
 .new-item-btn {
   @apply bg-green-600 rounded-full p-2 mt-3 text-sm text-white uppercase font-bold tracking-wider;
@@ -67,4 +71,54 @@ html {
 
 .table-actions .delete:hover {
   @apply text-red-800;
+}
+
+/* Modal Styling */
+
+.modal {
+  /* position: fixed;
+  top: 50%;
+  left: calc(50% + 7em);
+  transform: translate(-50%, -50%);
+  width: 600px;
+  max-width: calc(75% - 7em);
+  height: 400px;
+  max-height: 100%;
+  */
+  display: block;
+  position: fixed;
+  z-index: 1;
+  padding-top: 100px;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgb(0,0,0);
+  background-color: rgba(0,0,0,0.4);
+}
+
+.modal-content {
+  @apply bg-white;
+  @apply rounded;
+  @apply shadow-2xl;
+  margin: auto;
+  padding: 20px;
+  width: 600px;
+  max-width: calc(75% - 14em);
+}
+
+.close {
+  @apply text-grey-darker;
+  float: right;
+  font-size: 2em;
+  font-weight: bold;
+  margin-top: -0.5em;
+}
+
+.close:hover,
+.close:focus {
+  @apply text-black;
+  text-decoration: none;
+  cursor: pointer;
 }

@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import PropTypes from 'prop-types'
 import { Route } from 'react-router-dom'
 import SideNav from './SideNav'
 import Dashboard from './Dashboard'
@@ -29,6 +30,10 @@ class MainContainer extends Component {
       </div>
     )
   }
-} 
+}
+
+MainContainer.propTypes = {
+  match: PropTypes.object.isRequired,
+}
 
 export default MainContainer

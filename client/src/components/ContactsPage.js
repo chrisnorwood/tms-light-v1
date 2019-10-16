@@ -1,13 +1,17 @@
 import React, { Component } from 'react'
+import PropTypes from 'prop-types'
+import { Route, Link } from 'react-router-dom'
 import { connect } from 'react-redux'
 import ReactTable from 'react-table'
 import { FaEye, FaEdit, FaTrash, FaPlus } from 'react-icons/fa'
 import { caseInsensitiveFilter } from '../utils/tableHelpers'
+import ModalContainer from './modals/ModalContainer'
+import NewContact from './modals/NewContact'
 
 class ContactsPage extends Component {
 
   render() {
-    const { contacts } = this.props
+    const { contacts, match } = this.props
     const contactsArray = Object.values(contacts)
     const columns = [
       {
@@ -66,11 +70,11 @@ class ContactsPage extends Component {
     ]
 
     return (
-      <div className='bg-white shadow-xl rounded-lg rounded-lg w-full p-6'>
+      <div className='bg-white shadow-xl rounded-lg w-full p-6'>
         <div className='flex mb-4 justify-end'>
-          <button className='new-item-btn'>
+          <Link to={`${match.path}/new`} className='new-item-btn'>
               <span className='flex items-center'><FaPlus className='inline mr-1' /> New Contact</span>
-          </button>
+          </Link>
         </div>
         <ReactTable
           data={contactsArray}
@@ -79,9 +83,20 @@ class ContactsPage extends Component {
           defaultFilterMethod={caseInsensitiveFilter}
           className='-striped -highlight'
         />
+
+        <Route path={`${match.path}/new`} render={() => (
+          <ModalContainer {...this.props}>
+            <NewContact />
+          </ModalContainer>
+        )} />
       </div>
     )
   }
+}
+
+ContactsPage.propTypes = {
+  match: PropTypes.object.isRequired,
+  contacts: PropTypes.object.isRequired,
 }
 
 function mapStateToProps({ contacts }) {
