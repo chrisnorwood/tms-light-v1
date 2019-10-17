@@ -12,6 +12,13 @@ export const contactsUrl = `${baseUrl}/contacts`
 export const shippersUrl = `${baseUrl}/shippers`
 export const carriersUrl = `${baseUrl}/carriers`
 
+// Helper Functions
+//
+// *** Turns array into object of items, keyed by ID
+// From medium.com/dailyjs
+const arrayToObject = (arr, keyField) =>
+  Object.assign({}, ...arr.map(item => ({[item[keyField]]: item})))
+
 // Auth/User Calls
 
 export const loginUser = async (credentials) => {
@@ -59,10 +66,10 @@ export const getInitialData = () => {
   ])
   .then(result => Promise.all(result.map(dataType => dataType.json())))
   .then(([ loads, contacts, shippers, carriers ]) => ({
-    loads,
-    contacts,
-    shippers,
-    carriers,
+    loads: arrayToObject(loads, 'id'),
+    contacts: arrayToObject(contacts, 'id'),
+    shippers: arrayToObject(shippers, 'id'),
+    carriers: arrayToObject(carriers, 'id'), 
   }))
 }
 
