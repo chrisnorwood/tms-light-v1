@@ -21,7 +21,6 @@ const SideNav = () => {
         </li>
         <li>
           <NavLink
-            exact
             to='/app/loads'
             className='nav-link'
           >
@@ -31,7 +30,6 @@ const SideNav = () => {
         </li>
         <li>
           <NavLink
-            exact
             to='/app/contacts'
             className='nav-link'
           >
@@ -41,7 +39,6 @@ const SideNav = () => {
         </li>
         <li>
           <NavLink
-            exact
             to='/app/shippers'
             className='nav-link'
           >
@@ -51,7 +48,6 @@ const SideNav = () => {
         </li>
         <li>
           <NavLink
-            exact
             to='/app/carriers'
             className='nav-link'
           >
@@ -61,7 +57,6 @@ const SideNav = () => {
         </li>
         <li>
           <NavLink
-            exact
             to='/logout'
             className='nav-link'
           >

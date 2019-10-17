@@ -7,6 +7,7 @@ import { FaEye, FaEdit, FaTrash, FaPlus } from 'react-icons/fa'
 import { caseInsensitiveFilter } from '../utils/tableHelpers'
 import ModalContainer from './modals/ModalContainer'
 import NewContact from './modals/NewContact'
+import DeleteContact from './modals/DeleteContact'
 
 class ContactsPage extends Component {
 
@@ -20,10 +21,16 @@ class ContactsPage extends Component {
         headerClassName: 'text-left bg-grey-dark text-black text-2xl tracking-wide',
         columns: [
           {
+            Header: 'ID',
+            accessor: 'id',
+            headerClassName: 'bg-grey-light text-lg',
+            maxWidth: 50,
+          },
+          {
             Header: 'Name',
             accessor: 'name',
-            filterable: true,
             headerClassName: 'bg-grey-light text-lg',
+            filterable: true,
           },
           {
             Header: 'Phone',
@@ -60,9 +67,11 @@ class ContactsPage extends Component {
                 <button className='edit' onClick={() => console.log('Edit', row.original)}>
                   <FaEdit />
                 </button>
-                <button className='delete' onClick={() => console.log('Delete', row.original)}>
-                  <FaTrash />
-                </button>
+                <Link to={`${match.path}/${row.original.id}/delete`}>
+                  <button className='delete'>
+                    <FaTrash />
+                  </button>
+                </Link>
               </div>
             )
           }
@@ -82,12 +91,19 @@ class ContactsPage extends Component {
           columns={columns}
           defaultPageSize={10}
           defaultFilterMethod={caseInsensitiveFilter}
+          defaultSorted={[{ id: 'id', desc: true }]}
           className='-striped -highlight'
         />
 
-        <Route path={`${match.path}/new`} render={() => (
-          <ModalContainer {...this.props}>
-            <NewContact {...this.props} />
+        <Route path={`${match.path}/new`} render={(props) => (
+          <ModalContainer {...props} closePath={match.path}>
+            <NewContact {...props} closePath={match.path} />
+          </ModalContainer>
+        )} />
+
+        <Route path={`${match.path}/:contactId/delete`} render={(props) => (
+          <ModalContainer {...props} closePath={match.path}>
+            <DeleteContact {...props} closePath={match.path}/>
           </ModalContainer>
         )} />
       </div>

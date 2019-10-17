@@ -8,12 +8,12 @@ class ModalContainer extends Component {
   }
   
   render() {
-    const { match } = this.props
+    const { closePath } = this.props
 
     return (
       <div className='modal'>
         <div className='modal-content'>
-          <Link to={`${match.path}`}>
+          <Link to={closePath}>
             <span className='close'>&times;</span>
           </Link>
           {this.props.children}
@@ -26,6 +26,7 @@ class ModalContainer extends Component {
 ModalContainer.propTypes = {
   match: PropTypes.object.isRequired,
   children: PropTypes.node.isRequired,
+  closePath: PropTypes.string.isRequired,
 }
 
 export default ModalContainer

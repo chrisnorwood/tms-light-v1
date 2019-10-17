@@ -94,6 +94,14 @@ export const createContact = async (contactObj) => {
   return result
 }
 
+export const deleteContact = async (id) => {
+    const deleteContactUrl = `${contactsUrl}/${id}`
+    const result = await ky.delete(deleteContactUrl, createHeaders())
+
+    // Successful response will be status 204 with no content
+    return result
+}
+
 // Shippers
 
 export const getShippers = async () => {
