@@ -22,6 +22,7 @@
 * There is some race condition getting weird between my reAuth on index.js and manual type of /logout route
 * Test my API User model/controller a bit more (validations + no same user)
 * consider dispatching handleGetInitialData within the APP somewhere, rather than in the action ???? then the token can come from the store, but problem is I will still be passing the damn token
+* consider my delete reduct actions/reducer, with that helper function?  is it hacky???
 
 ## Resources
 * Initial project created similar in structure to the Heroku & Bruno B. tutorial

@@ -64,7 +64,7 @@ export function handleDeleteContact (contactId, history) {
         // Remove the contact from state
         dispatch(removeContact(contactId))
         // Pop a toastie
-        toast.success('Contact deleted', { position: 'top-center'})
+        toast.success('Contact deleted.', { position: 'top-center'})
         // Redirect back to contacts list
         history.push('/app/contacts')
       })
