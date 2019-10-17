@@ -87,7 +87,7 @@ class ContactsPage extends Component {
 
         <Route path={`${match.path}/new`} render={() => (
           <ModalContainer {...this.props}>
-            <NewContact />
+            <NewContact {...this.props} />
           </ModalContainer>
         )} />
       </div>

@@ -88,6 +88,12 @@ export const getContacts = async () => {
   return result
 }
 
+export const createContact = async (contactObj) => {
+  const result = await ky.post(contactsUrl, {...createHeaders(), json: contactObj }).then(res => res.json())
+
+  return result
+}
+
 // Shippers
 
 export const getShippers = async () => {

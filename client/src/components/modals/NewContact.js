@@ -3,6 +3,7 @@ import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { Formik, Form, Field, ErrorMessage } from 'formik'
 import Select from 'react-select';
+import { handleCreateContact } from '../../actions/contacts'
 
 class NewContact extends Component {
   handleSubmit = (values, setSubmitting) => {
@@ -10,8 +11,19 @@ class NewContact extends Component {
     // history in case success can redirect,
     // Formik setSubmitting for callback in case of error
     // this.props.dispatch(handleUserSignup(values, this.props.history, setSubmitting))
-    console.log('Form data: ', values)
-    setTimeout(() => setSubmitting(false), 2000)
+    const contact = {
+      contact: {
+        name: values.name,
+        email: values.email,
+        phone: values.phone,
+        notes: values.notes,
+        contactable_type: values.parent.type,
+        contactable_id: values.parent.id
+      }
+    }
+
+    console.log('Contact object: ', contact)
+    this.props.dispatch(handleCreateContact(contact, this.props.history, setSubmitting))
   }
   
   render() {
@@ -42,12 +54,13 @@ class NewContact extends Component {
           Create New Contact
         </div>
         <Formik
-          initialValues={{name: '', phone: '', email: '', notes: ''}}
+          initialValues={{name: '', phone: '', email: '', notes: '', parent: {} }}
           validate={values => {
             const errors = {};
             if (!values.name) errors.name = 'Required'
             if (!values.phone) errors.phone = 'Required'
             if (!values.email) errors.email = 'Required'
+            if (Object.keys(values.parent).length === 0 && values.parent.constructor === Object) errors.parent = 'Required'
             return errors
           }}
           onSubmit={(values, { setSubmitting }) => {
@@ -89,6 +102,7 @@ class NewContact extends Component {
                   component={MySelect}
                   options={parentSelectOptions}
                 />
+                <ErrorMessage name='parent' component='div' className='ml-4 mt-2 text-red-600 text-xs' /> 
               </div>
               <div className='mb-3'>
                 <Field
@@ -139,7 +153,9 @@ const MySelect = ({ options, field, form }) => {
 
 NewContact.propTypes = {
   shippers: PropTypes.object.isRequired,
-  carriers: PropTypes.object.isRequired
+  carriers: PropTypes.object.isRequired,
+  dispatch: PropTypes.func.isRequired,
+  history: PropTypes.object.isRequired
 }
 
 function mapStateToProps ({ carriers, shippers }) {
