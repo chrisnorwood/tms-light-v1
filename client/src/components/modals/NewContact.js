@@ -1,6 +1,5 @@
 import React, { Component, Fragment } from 'react'
 import PropTypes from 'prop-types'
-import { Link } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { Formik, Form, Field, ErrorMessage } from 'formik'
 import Select from 'react-select';
@@ -138,7 +137,12 @@ const MySelect = ({ options, field, form }) => {
   )
 }
 
-function mapStateToProps ({ loads, carriers, shippers }) {
+NewContact.propTypes = {
+  shippers: PropTypes.object.isRequired,
+  carriers: PropTypes.object.isRequired
+}
+
+function mapStateToProps ({ carriers, shippers }) {
   return {
     shippers,
     carriers

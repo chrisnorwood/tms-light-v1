@@ -13,6 +13,7 @@ class ContactsPage extends Component {
   render() {
     const { contacts, match } = this.props
     const contactsArray = Object.values(contacts)
+
     const columns = [
       {
         Header: 'Contacts',
@@ -96,7 +97,7 @@ class ContactsPage extends Component {
 
 ContactsPage.propTypes = {
   match: PropTypes.object.isRequired,
-  contacts: PropTypes.object.isRequired,
+  contacts: PropTypes.object.isRequired
 }
 
 function mapStateToProps({ contacts }) {
