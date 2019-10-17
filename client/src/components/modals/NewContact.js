@@ -3,6 +3,7 @@ import PropTypes from 'prop-types'
 import { Link } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { Formik, Form, Field, ErrorMessage } from 'formik'
+import Select from 'react-select';
 
 class NewContact extends Component {
   handleSubmit = (values, setSubmitting) => {
@@ -11,9 +12,31 @@ class NewContact extends Component {
     // Formik setSubmitting for callback in case of error
     // this.props.dispatch(handleUserSignup(values, this.props.history, setSubmitting))
     console.log('Form data: ', values)
+    setTimeout(() => setSubmitting(false), 2000)
   }
   
   render() {
+    // Refactor this select options generation down into new helper function????
+    // Could add
+    const { shippers, carriers } = this.props
+    const shippersArray = Object.values(shippers).map(item => ({
+      value: {
+        type: 'Shipper',
+        id: item.id,
+      },
+      label: item.company_name,
+    }))
+
+    const carriersArray = Object.values(carriers).map(item => ({
+      value: {
+        type: 'Carrier',
+        id: item.id,
+      },
+      label: item.company_name,
+    }))
+
+    const parentSelectOptions = shippersArray.concat(carriersArray)
+
     return (
       <Fragment>
         <div className='border-b border-grey py-2 font-bold text-black text-center text-lg tracking-widest uppercase'>
@@ -63,6 +86,13 @@ class NewContact extends Component {
               </div>
               <div className='mb-3'>
                 <Field
+                  name='parent'
+                  component={MySelect}
+                  options={parentSelectOptions}
+                />
+              </div>
+              <div className='mb-3'>
+                <Field
                   className={`border w-full p-3 border-grey`}
                   component='textarea'
                   rows='3'
@@ -87,4 +117,32 @@ class NewContact extends Component {
   }
 }
 
-export default connect()(NewContact)
+const MySelect = ({ options, field, form }) => {
+  const customStyles = {
+    control: (base) => ({ ...base, borderColor: '#d5d9e3', padding: '0.25rem', borderRadius: '0px', color: '#626471'}),
+    placeholder: (base) => ({...base, color: '#adb4c2'}),
+    input: (base) => ({...base, color: '#626471'}),
+    singleValue: (base) => ({...base, color: '#626471'}),
+  }
+
+  return (
+    <Select
+      options={options}
+      placeholder='Select Shipper or Carrier...'
+      name={field.name}
+      value={options ? options.find(option => option.value === field.value) : ''}
+      onChange={(option) => form.setFieldValue(field.name, option.value)}
+      onBlur={field.onBlur}
+      styles={customStyles}
+    />
+  )
+}
+
+function mapStateToProps ({ loads, carriers, shippers }) {
+  return {
+    shippers,
+    carriers
+  }
+}
+
+export default connect(mapStateToProps)(NewContact)
