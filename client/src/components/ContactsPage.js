@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React, { Component, Fragment } from 'react'
 import PropTypes from 'prop-types'
 import { Route, Link } from 'react-router-dom'
 import { connect } from 'react-redux'
@@ -8,6 +8,7 @@ import { caseInsensitiveFilter } from '../utils/tableHelpers'
 import ModalContainer from './modals/ModalContainer'
 import NewContact from './modals/NewContact'
 import DeleteContact from './modals/DeleteContact'
+import ViewContact from './modals/ViewContact'
 
 class ContactsPage extends Component {
 
@@ -30,7 +31,7 @@ class ContactsPage extends Component {
             Header: 'Name',
             accessor: 'name',
             headerClassName: 'bg-grey-light text-lg',
-            filterable: true,
+            
           },
           {
             Header: 'Phone',
@@ -61,9 +62,11 @@ class ContactsPage extends Component {
             maxWidth: 150,
             Cell: row => (
               <div className='table-actions'>
-                <button className='view' onClick={() => console.log('View', row.original)}>
-                  <FaEye />
-                </button>
+                <Link to={`${match.path}/${row.original.id}/view`}>
+                  <button className='view'>
+                    <FaEye />
+                  </button>
+                </Link>
                 <button className='edit' onClick={() => console.log('Edit', row.original)}>
                   <FaEdit />
                 </button>
@@ -80,33 +83,42 @@ class ContactsPage extends Component {
     ]
 
     return (
-      <div className='bg-white shadow-xl rounded-lg w-full p-6'>
-        <div className='flex mb-4 justify-end'>
+      <Fragment>
+        <div className='flex mb-4 px-4 justify-end'>
           <Link to={`${match.path}/new`} className='new-item-btn'>
               <span className='flex items-center'><FaPlus className='inline mr-1' /> New Contact</span>
           </Link>
         </div>
-        <ReactTable
-          data={contactsArray}
-          columns={columns}
-          defaultPageSize={10}
-          defaultFilterMethod={caseInsensitiveFilter}
-          defaultSorted={[{ id: 'id', desc: true }]}
-          className='-striped -highlight'
-        />
+        <div className='bg-white shadow-xl rounded-lg w-full p-4'>
+          
+          <ReactTable
+            data={contactsArray}
+            columns={columns}
+            defaultPageSize={10}
+            defaultFilterMethod={caseInsensitiveFilter}
+            defaultSorted={[{ id: 'id', desc: true }]}
+            className='-striped -highlight'
+          />
 
-        <Route path={`${match.path}/new`} render={(props) => (
-          <ModalContainer {...props} closePath={match.path}>
-            <NewContact {...props} closePath={match.path} />
-          </ModalContainer>
-        )} />
+          <Route path={`${match.path}/new`} render={(props) => (
+            <ModalContainer {...props} closePath={match.path}>
+              <NewContact {...props} closePath={match.path} />
+            </ModalContainer>
+          )} />
+          
+          <Route path={`${match.path}/:contactId/view`} render={(props) => (
+            <ModalContainer {...props} closePath={match.path}>
+              <ViewContact {...props} closePath={match.path}/>
+            </ModalContainer>
+          )} />
 
-        <Route path={`${match.path}/:contactId/delete`} render={(props) => (
-          <ModalContainer {...props} closePath={match.path}>
-            <DeleteContact {...props} closePath={match.path}/>
-          </ModalContainer>
-        )} />
-      </div>
+          <Route path={`${match.path}/:contactId/delete`} render={(props) => (
+            <ModalContainer {...props} closePath={match.path}>
+              <DeleteContact {...props} closePath={match.path}/>
+            </ModalContainer>
+          )} />
+        </div>
+      </Fragment>
     )
   }
 }

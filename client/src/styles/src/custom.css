@@ -34,7 +34,7 @@ html {
 /* Table Styling */
 
 .new-item-btn {
-  @apply bg-green-600 rounded-full p-2 mt-3 text-sm text-white uppercase font-bold tracking-wider;
+  @apply bg-green-600 rounded-full p-2 mt-3 text-sm text-white uppercase font-bold tracking-wider shadow-xl;
 }
 
 .new-item-btn:hover {

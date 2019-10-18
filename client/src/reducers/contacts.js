@@ -16,8 +16,7 @@ export default function loads(state = initialState, action) {
         [action.payload.contact.id]: action.payload.contact,
       }
       case REMOVE_CONTACT :
-        let stateWithRemovedContact = removeByKey(state, action.payload.contactId)
-        return stateWithRemovedContact
+        return removeByKey(state, action.payload.contactId)
     default :
       return state
   }
