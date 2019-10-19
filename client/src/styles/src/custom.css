@@ -31,7 +31,7 @@ html {
   @apply bg-grey-dark text-black;
 }
 
-/* Table Styling */
+/* react-table Additional Item Styling */
 
 .new-item-btn {
   @apply bg-green-600 rounded-full p-2 mt-3 text-sm text-white uppercase font-bold tracking-wider shadow-xl;
@@ -121,4 +121,29 @@ html {
   @apply text-black;
   text-decoration: none;
   cursor: pointer;
+}
+
+/* View Item Modal Styling (css tables) */
+.labeled-list {
+  display: table;
+  list-style: none;
+  padding-left: 0;
+}
+
+.labeled-list > li {
+  display: table-row;
+}
+
+.labeled-list > li > * {
+  display: table-cell;
+  @apply p-2;
+}
+
+.labeled-list label {
+  font-weight: bold;
+  text-align: right;
+}
+
+.labeled-list label:after {
+  content: ':';
 }

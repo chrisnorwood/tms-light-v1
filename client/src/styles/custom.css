@@ -39,7 +39,7 @@ html {
   color: #2B4964;
 }
 
-/* Table Styling */
+/* react-table Additional Item Styling */
 
 .new-item-btn {
   background-color: #38a169;
@@ -140,4 +140,30 @@ html {
   color: #2B4964;
   text-decoration: none;
   cursor: pointer;
+}
+
+/* View Item Modal Styling (css tables) */
+
+.labeled-list {
+  display: table;
+  list-style: none;
+  padding-left: 0;
+}
+
+.labeled-list > li {
+  display: table-row;
+}
+
+.labeled-list > li > * {
+  display: table-cell;
+  padding: 0.5rem;
+}
+
+.labeled-list label {
+  font-weight: bold;
+  text-align: right;
+}
+
+.labeled-list label:after {
+  content: ':';
 }

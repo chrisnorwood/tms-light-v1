@@ -17,12 +17,32 @@ class ViewContact extends Component {
           Contact Details
         </div>
         <div className='m-4'>
-          <p className='p-2'>
-            <div className='italic pr-2'>ID:</div>
-            <div>{contact.id}</div>
-            <br />
-            <span className='italic pr-2'>Name:</span><span>{contact.name}</span>
-          </p>
+          <ul className='labeled-list'>
+            <li>
+              <label>Name</label>
+              <div>{contact.name}</div>
+            </li>
+            <li>
+              <label>Type</label>
+              <div>{contact.contactable_type}</div>
+            </li>
+            <li>
+              <label>Company</label>
+              <div>PARENT NAME HERE</div>
+            </li>
+            <li>
+              <label>Phone</label>
+              <div>{contact.phone}</div>
+            </li>
+            <li>
+              <label>Email</label>
+              <div>{contact.email}</div>
+            </li>
+            <li>
+              <label>Notes</label>
+              <div>{contact.notes}</div>
+            </li>
+          </ul>
         </div>
         <div className='flex'>
           <Link
@@ -41,11 +61,16 @@ ViewContact.propTypes = {
   match: PropTypes.object.isRequired,
   history: PropTypes.object.isRequired,
   closePath: PropTypes.string.isRequired,
+  contacts: PropTypes.object.isRequired,
+  carriers: PropTypes.object.isRequired,
+  shippers: PropTypes.object.isRequired,
 }
 
-function mapStateToProps ({ contacts }) {
+function mapStateToProps ({ contacts, carriers, shippers }) {
   return {
-    contacts
+    contacts,
+    carriers,
+    shippers,
   }
 }
 

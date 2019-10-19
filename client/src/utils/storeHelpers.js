@@ -1,4 +1,4 @@
-export function removeByKey (myObj, deleteKey) {
+export function removeFromObjectByKey (myObj, deleteKey) {
   return Object.keys(myObj)
     .filter(key => key !== deleteKey)
     .reduce((result, current) => {

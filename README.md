@@ -23,6 +23,7 @@
 * Test my API User model/controller a bit more (validations + no same user)
 * consider dispatching handleGetInitialData within the APP somewhere, rather than in the action ???? then the token can come from the store, but problem is I will still be passing the damn token
 * consider my delete reduct actions/reducer, with that helper function?  is it hacky???
+* should pass in my Contact and Its parents through props to the modal component as opposed to doing the full fresh recalculation every time in the freakin modal components
 
 ## Resources
 * Initial project created similar in structure to the Heroku & Bruno B. tutorial
