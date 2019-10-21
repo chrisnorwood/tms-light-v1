@@ -61,9 +61,9 @@ const ContactsPage = (props) => {
             const companyName = parentObj ? parentObj.company_name : 'Loading company name...'
 
             return (
-              <div>
+              <Fragment>
                 {companyName}
-              </div>
+              </Fragment>
             )
           }
         },
