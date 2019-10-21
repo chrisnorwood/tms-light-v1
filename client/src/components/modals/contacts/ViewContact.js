@@ -5,8 +5,8 @@ import { connect } from 'react-redux'
 import ModalContainer from '../ModalContainer'
 
 const ViewContact = ({ contact, parent, closePath }) => {
-  if (!contact) return <div className='text-center text-xl'>That is not a valid contact.</div>
-  if (!parent) return <div className='text-center text-xl'>Loading</div>
+  if (!contact) return <ModalContainer closePath={closePath}><div className='text-center text-xl'>That is not a valid contact.</div></ModalContainer>
+  if (!parent) return <ModalContainer closePath={closePath}><div className='text-center text-xl'>Loading</div></ModalContainer>
 
   return (
     <ModalContainer closePath={closePath}>

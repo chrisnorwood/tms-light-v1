@@ -15,7 +15,7 @@ const DeleteContact = ({ closePath, contacts, match, history, dispatch }) => {
   const { contactId } = match.params
   const contact = contacts[contactId]
 
-  if (!contact) return <div className='text-center text-xl'>That is not a valid contact.</div>
+  if (!contact) return <ModalContainer closePath={closePath}><div className='text-center text-xl'>That is not a valid contact.</div></ModalContainer>
 
   return (
     <ModalContainer closePath={closePath}>

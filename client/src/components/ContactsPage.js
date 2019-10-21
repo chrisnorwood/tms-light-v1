@@ -6,8 +6,9 @@ import ReactTable from 'react-table'
 import { FaEye, FaEdit, FaTrash, FaPlus } from 'react-icons/fa'
 import { caseInsensitiveFilter } from '../utils/tableHelpers'
 import NewContact from './modals/contacts/NewContact'
-import DeleteContact from './modals/contacts/DeleteContact'
 import ViewContact from './modals/contacts/ViewContact'
+import EditContact from './modals/contacts/EditContact'
+import DeleteContact from './modals/contacts/DeleteContact'
 
 const ContactsPage = (props) => {
   const { contacts, match } = props
@@ -80,9 +81,11 @@ const ContactsPage = (props) => {
                   <FaEye />
                 </button>
               </Link>
-              <button className='edit' onClick={() => console.log('Edit', row.original)}>
-                <FaEdit />
-              </button>
+              <Link to={`${match.path}/${row.original.id}/edit`}>
+                <button className='edit'>
+                  <FaEdit />
+                </button>
+              </Link>
               <Link to={`${match.path}/${row.original.id}/delete`}>
                 <button className='delete'>
                   <FaTrash />
@@ -119,6 +122,10 @@ const ContactsPage = (props) => {
         
         <Route path={`${match.path}/:contactId/view`} render={(props) => (
           <ViewContact {...props} closePath={match.path}/>
+        )} />
+
+        <Route path={`${match.path}/:contactId/edit`} render={(props) => (
+          <EditContact {...props} closePath={match.path}/>
         )} />
 
         <Route path={`${match.path}/:contactId/delete`} render={(props) => (
