@@ -54,6 +54,22 @@ class ContactsPage extends Component {
             maxWidth: 100,
           },
           {
+            Header: 'Company',
+            headerClassName: 'bg-grey-light text-lg',
+            Cell: row => {
+              const parentType = row.original.contactable_type.toLowerCase() + 's'
+              const parentId = row.original.contactable_id
+              const parentObj = this.props[parentType][parentId]
+              const companyName = parentObj ? parentObj.company_name : 'Loading company name...'
+
+              return (
+                <div>
+                  {companyName}
+                </div>
+              )
+            }
+          },
+          {
             Header: 'Actions',
             headerClassName: 'bg-grey-light text-lg',
             sortable: false,
@@ -118,12 +134,16 @@ class ContactsPage extends Component {
 
 ContactsPage.propTypes = {
   match: PropTypes.object.isRequired,
-  contacts: PropTypes.object.isRequired
+  contacts: PropTypes.object.isRequired,
+  carriers: PropTypes.object.isRequired,
+  shippers: PropTypes.object.isRequired,
 }
 
-function mapStateToProps({ contacts }) {
+function mapStateToProps({ contacts, carriers, shippers }) {
   return {
-    contacts
+    contacts,
+    carriers,
+    shippers,
   }
 }
 

@@ -69,6 +69,7 @@ function mapStateToProps ({ contacts, carriers, shippers }) {
     contacts,
     carriers,
     shippers,
+    // ^^ DO I NEED THESE
   }
 }
 
