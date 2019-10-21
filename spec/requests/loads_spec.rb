@@ -128,7 +128,7 @@ RSpec.describe 'Loads API', type: :request do
   describe 'PUT /api/v1/loads/:id' do
     let(:valid_attributes) { 
       {load: { 
-        origin: 'Oceanside', 
+        origin: 'Salem', 
         destination: 'KY',
         amt_charged: '1700',
         amt_paid: '1200',
@@ -141,11 +141,11 @@ RSpec.describe 'Loads API', type: :request do
 
     context 'when the record exists' do
       it 'updates the record' do
-        expect(response.body).to be_empty
+        expect(json['origin']).to eq('Salem')
       end
 
-      it 'returns status code 204' do
-        expect(response).to have_http_status(204)
+      it 'returns status code 202' do
+        expect(response).to have_http_status(202)
       end
     end
 

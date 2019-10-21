@@ -86,18 +86,18 @@ RSpec.describe 'Shippers API', type: :request do
   # Test suite for PUT /api/v1/shippers/:id
   describe 'PUT /api/v1/shippers/:id' do
     # valid payload
-    let(:valid_attributes) { {shipper: { company_name: 'Company, Inc.', notes: 'Lorem ipsum and such' }}.to_json }
+    let(:valid_attributes) { {shipper: { company_name: 'Company, LLC', notes: 'Lorem ipsum and such' }}.to_json }
 
     # make HTTP get request before each example
     before { put "/api/v1/shippers/#{shipper_id}", params: valid_attributes, headers: headers }
 
     context 'when the record exists' do
       it 'updates the record' do
-        expect(response.body).to be_empty
+        expect(json['company_name']).to eq('Company, LLC')
       end
 
-      it 'returns status code 204' do
-        expect(response).to have_http_status(204)
+      it 'returns status code 202' do
+        expect(response).to have_http_status(202)
       end
     end
 

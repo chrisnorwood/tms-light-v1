@@ -24,7 +24,8 @@ module Api::V1
     # PATCH/PUT /shippers/:id
     def update
       @shipper.update(shipper_params)
-      head :no_content
+      
+      json_response(@shipper, :accepted)
     end
 
     # DELETE /shippers/:id

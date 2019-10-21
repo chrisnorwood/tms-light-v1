@@ -24,7 +24,8 @@ module Api::V1
     # PATCH/PUT /carriers/:id
     def update
       @carrier.update(carrier_params)
-      head :no_content
+      
+      json_response(@carrier, :accepted)
     end
 
     # DELETE /carriers/:id

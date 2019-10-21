@@ -32,7 +32,8 @@ module Api::V1
     # PATCH/PUT /loads/:id
     def update
       @load.update(load_params)
-      head :no_content
+      
+      json_response(@load, :accepted)
     end
 
     # DELETE /loads/:id

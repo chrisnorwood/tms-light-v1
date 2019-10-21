@@ -127,7 +127,7 @@ RSpec.describe 'Contacts API', type: :request do
     # valid payload
     let(:valid_attributes) { 
       { contact: 
-        { name: 'John Doe', phone: '1234567890', email: 'john@doe.net', contactable_type: 'Shipper', contactable_id: valid_shipper_id }
+        { name: 'John Doob', phone: '1234567890', email: 'john@doe.net', contactable_type: 'Shipper', contactable_id: valid_shipper_id }
       }.to_json
     }
 
@@ -136,11 +136,11 @@ RSpec.describe 'Contacts API', type: :request do
 
     context 'when the record exists' do
       it 'updates the record' do
-        expect(response.body).to be_empty
+        expect(json['name']).to eq('John Doob')
       end
 
-      it 'returns status code 204' do
-        expect(response).to have_http_status(204)
+      it 'returns status code 202' do
+        expect(response).to have_http_status(202)
       end
     end
 
