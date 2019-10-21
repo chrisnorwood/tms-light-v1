@@ -4,11 +4,9 @@ import { Link } from 'react-router-dom'
 import { connect } from 'react-redux'
 import ModalContainer from '../ModalContainer'
 
-const ViewContact = ({ closePath, contacts, match }) => {
-  const { contactId } = match.params
-  const contact = contacts[contactId]
-
+const ViewContact = ({ contact, parent, closePath }) => {
   if (!contact) return <div className='text-center text-xl'>That is not a valid contact.</div>
+  if (!parent) return <div className='text-center text-xl'>Loading</div>
 
   return (
     <ModalContainer closePath={closePath}>
@@ -27,7 +25,7 @@ const ViewContact = ({ closePath, contacts, match }) => {
           </li>
           <li>
             <label>Company</label>
-            <div>PARENT NAME HERE</div>
+            <div>{parent.company_name}</div>
           </li>
           <li>
             <label>Phone</label>
@@ -59,17 +57,24 @@ ViewContact.propTypes = {
   match: PropTypes.object.isRequired,
   history: PropTypes.object.isRequired,
   closePath: PropTypes.string.isRequired,
-  contacts: PropTypes.object.isRequired,
-  carriers: PropTypes.object.isRequired,
-  shippers: PropTypes.object.isRequired,
+  contact: PropTypes.object,
+  parent: PropTypes.object,
 }
 
-function mapStateToProps ({ contacts, carriers, shippers }) {
+function mapStateToProps (state, ownProps) {
+  const contactId = ownProps.match.params.contactId
+  const contact = state.contacts[contactId]
+  let parentObj = {}
+
+  if (contact) {
+    const parentType = contact.contactable_type.toLowerCase() + 's' 
+    const parentId = contact.contactable_id
+    parentObj = state[parentType][parentId]
+  }
+
   return {
-    contacts,
-    carriers,
-    shippers,
-    // ^^ DO I NEED THESE
+    contact,
+    parent: parentObj,
   }
 }
 

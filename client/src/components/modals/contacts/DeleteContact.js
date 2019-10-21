@@ -49,6 +49,7 @@ const DeleteContact = ({ closePath, contacts, match, history, dispatch }) => {
 }
 
 DeleteContact.propTypes = {
+  contacts: PropTypes.object.isRequired,
   match: PropTypes.object.isRequired,
   history: PropTypes.object.isRequired,
   closePath: PropTypes.string.isRequired,
