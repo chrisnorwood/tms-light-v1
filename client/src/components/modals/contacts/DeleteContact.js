@@ -1,8 +1,9 @@
-import React, { Component, Fragment } from 'react'
+import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
-import { handleDeleteContact } from '../../actions/contacts'
+import { handleDeleteContact } from '../../../actions/contacts'
+import ModalContainer from '../ModalContainer'
 
 class DeleteContact extends Component {
   handleDelete = (contactId) => {
@@ -19,7 +20,7 @@ class DeleteContact extends Component {
     if (!contact) return <div className='text-center text-xl'>That is not a valid contact.</div>
 
     return (
-      <Fragment>
+      <ModalContainer closePath={closePath}>
         <div className='border-b border-grey py-2 font-bold text-black text-center text-lg tracking-widest uppercase'>
           Are you sure?
         </div>
@@ -45,7 +46,7 @@ class DeleteContact extends Component {
             Delete
           </button>
         </div>
-      </Fragment>
+      </ModalContainer>
     )
   }
 }

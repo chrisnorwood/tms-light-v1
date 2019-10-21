@@ -1,7 +1,8 @@
-import React, { Component, Fragment } from 'react'
+import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { Link } from 'react-router-dom'
 import { connect } from 'react-redux'
+import ModalContainer from '../ModalContainer'
 
 class ViewContact extends Component {
   render() {
@@ -12,7 +13,7 @@ class ViewContact extends Component {
     if (!contact) return <div className='text-center text-xl'>That is not a valid contact.</div>
 
     return (
-      <Fragment>
+      <ModalContainer closePath={closePath}>
         <div className='border-b border-grey py-2 font-bold text-black text-center text-lg tracking-widest uppercase'>
           Contact Details
         </div>
@@ -52,7 +53,7 @@ class ViewContact extends Component {
             Close
           </Link>
         </div>
-      </Fragment>
+      </ModalContainer>
     )
   }
 }

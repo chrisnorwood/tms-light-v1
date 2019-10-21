@@ -5,10 +5,9 @@ import { connect } from 'react-redux'
 import ReactTable from 'react-table'
 import { FaEye, FaEdit, FaTrash, FaPlus } from 'react-icons/fa'
 import { caseInsensitiveFilter } from '../utils/tableHelpers'
-import ModalContainer from './modals/ModalContainer'
-import NewContact from './modals/NewContact'
-import DeleteContact from './modals/DeleteContact'
-import ViewContact from './modals/ViewContact'
+import NewContact from './modals/contacts/NewContact'
+import DeleteContact from './modals/contacts/DeleteContact'
+import ViewContact from './modals/contacts/ViewContact'
 
 class ContactsPage extends Component {
 
@@ -101,21 +100,15 @@ class ContactsPage extends Component {
           />
 
           <Route path={`${match.path}/new`} render={(props) => (
-            <ModalContainer {...props} closePath={match.path}>
-              <NewContact {...props} closePath={match.path} />
-            </ModalContainer>
+            <NewContact {...props} closePath={match.path} />
           )} />
           
           <Route path={`${match.path}/:contactId/view`} render={(props) => (
-            <ModalContainer {...props} closePath={match.path}>
-              <ViewContact {...props} closePath={match.path}/>
-            </ModalContainer>
+            <ViewContact {...props} closePath={match.path}/>
           )} />
 
           <Route path={`${match.path}/:contactId/delete`} render={(props) => (
-            <ModalContainer {...props} closePath={match.path}>
-              <DeleteContact {...props} closePath={match.path}/>
-            </ModalContainer>
+            <DeleteContact {...props} closePath={match.path}/>
           )} />
         </div>
       </Fragment>

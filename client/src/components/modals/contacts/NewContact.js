@@ -1,9 +1,10 @@
-import React, { Component, Fragment } from 'react'
+import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { Formik, Form, Field, ErrorMessage } from 'formik'
 import Select from 'react-select';
-import { handleCreateContact } from '../../actions/contacts'
+import { handleCreateContact } from '../../../actions/contacts'
+import ModalContainer from '../ModalContainer'
 
 class NewContact extends Component {
   handleSubmit = (values, setSubmitting) => {
@@ -29,7 +30,7 @@ class NewContact extends Component {
   render() {
     // Refactor this select options generation down into new helper function????
     // Could add
-    const { shippers, carriers } = this.props
+    const { shippers, carriers, closePath } = this.props
     const shippersArray = Object.values(shippers).map(item => ({
       value: {
         type: 'Shipper',
@@ -49,7 +50,7 @@ class NewContact extends Component {
     const parentSelectOptions = shippersArray.concat(carriersArray)
 
     return (
-      <Fragment>
+      <ModalContainer closePath={closePath}>
         <div className='border-b border-grey py-2 font-bold text-black text-center text-lg tracking-widest uppercase'>
           Create New Contact
         </div>
@@ -125,7 +126,7 @@ class NewContact extends Component {
             </Form>
           )}
         />
-      </Fragment>
+      </ModalContainer>
     )
   }
 }
@@ -155,7 +156,8 @@ NewContact.propTypes = {
   shippers: PropTypes.object.isRequired,
   carriers: PropTypes.object.isRequired,
   dispatch: PropTypes.func.isRequired,
-  history: PropTypes.object.isRequired
+  history: PropTypes.object.isRequired,
+  closePath: PropTypes.string.isRequired,
 }
 
 function mapStateToProps ({ carriers, shippers }) {

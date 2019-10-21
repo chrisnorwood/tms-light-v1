@@ -24,7 +24,6 @@ class ModalContainer extends Component {
 } 
 
 ModalContainer.propTypes = {
-  match: PropTypes.object.isRequired,
   children: PropTypes.node.isRequired,
   closePath: PropTypes.string.isRequired,
 }
