@@ -1,34 +1,64 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { Link } from 'react-router-dom'
 import { connect } from 'react-redux'
+import { handleUpdateContact } from '../../../actions/contacts'
+import { optionsArrayForShippersAndCarriers } from '../../../utils/formHelpers'
 import ModalContainer from '../ModalContainer'
+import ContactForm from '../../forms/ContactForm'
 
-const EditContact = ({ contacts, closePath, dispatch, history }) => {
-  // if (!contact) return <div className='text-center text-xl'>That is not a valid contact.</div>
-  // if (!parent) return <div className='text-center text-xl'>Loading</div>
+const EditContact = ({ contact, shippers, carriers, closePath, dispatch, history }) => {
+  if (!contact) return <ModalContainer closePath={closePath}><div className='text-center text-xl'>That is not a valid contact.</div></ModalContainer>
+
+  const handleSubmit = (values, setSubmitting) => {
+    // Pass new data to API via action, history in case success can redirect,
+    // Formik setSubmitting for callback in case of error
+    const contactValues = {
+      contact: {
+        name: values.name,
+        email: values.email,
+        phone: values.phone,
+        notes: values.notes,
+        contactable_type: values.parent.type,
+        contactable_id: values.parent.id
+      }
+    }
+
+    const contactId = contact.id
+
+    dispatch(handleUpdateContact(contactId, contactValues, history, setSubmitting))
+  }
+
+  const parentSelectOptions = optionsArrayForShippersAndCarriers(shippers, carriers)
+
+  // If initial value desired for parent property, that is the 'select', it must be in the form of { type: string, id: int }
+  const initialFormValues = { 
+    name: contact.name,
+    phone: contact.phone,
+    email: contact.email,
+    notes: contact.notes,
+    parent: {
+      type: contact.contactable_type,
+      id: contact.contactable_id,
+    },
+  }
 
   return (
     <ModalContainer closePath={closePath}>
       <div className='border-b border-grey py-2 font-bold text-black text-center text-lg tracking-widest uppercase'>
         Edit Contact
       </div>
-      <div className='m-4'>
-        pee pee weiners
-      </div>
-      <div className='flex'>
-        <Link
-          to={closePath}
-          className='bg-primary text-center w-full p-4 mt-3 mx-2 text-sm text-white uppercase font-bold tracking-wider hover:bg-primary-dark disabled:opacity-75 disabled:cursor-not-allowed'
-        >
-          Close
-        </Link>
-      </div>
+      <ContactForm
+        initialValues={initialFormValues}
+        selectOptionsArray={parentSelectOptions}
+        buttonText='Save'
+        submitFunction={handleSubmit}
+      />
     </ModalContainer>
   )
 }
 
 EditContact.propTypes = {
+  contact: PropTypes.object,
   match: PropTypes.object.isRequired,
   history: PropTypes.object.isRequired,
   closePath: PropTypes.string.isRequired,
@@ -36,8 +66,11 @@ EditContact.propTypes = {
 }
 
 function mapStateToProps (state, ownProps) {
+  const contactId = ownProps.match.params.contactId
+  const contact = state.contacts[contactId]
+
   return {
-    contacts: state.contacts,
+    contact,
     carriers: state.carriers,
     shippers: state.shippers,
   }

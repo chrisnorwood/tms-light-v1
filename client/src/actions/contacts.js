@@ -1,9 +1,10 @@
-import { createContact, deleteContact } from '../services/api'
+import { createContact, deleteContact, updateContact } from '../services/api'
 import { toast } from 'react-toastify'
 
 export const RECEIVE_CONTACTS = 'RECEIVE_CONTACTS'
 export const ADD_CONTACT = 'ADD_CONTACT'
 export const REMOVE_CONTACT = 'REMOVE_CONTACT'
+export const UPDATE_CONTACT = 'UPDATE_CONTACT'
 
 export function receiveContacts (contacts) {
   return {
@@ -32,6 +33,15 @@ function removeContact (contactId) {
   }
 }
 
+function updateStoreContact (contact) {
+  return {
+    type: UPDATE_CONTACT,
+    payload: {
+      contact,
+    }
+  }
+}
+
 // Thunks
 
 export function handleCreateContact (contactObj, history, setFormikSubmitting = null) {
@@ -48,7 +58,7 @@ export function handleCreateContact (contactObj, history, setFormikSubmitting = 
         history.push('/app/contacts')
       })
       .catch(error => {
-        console.log('Error creating contact', error.message)
+        console.log('Error creating contact: ', error.message)
         // Pop a toastie
         toast.error('Could not create contact. Please try again.', { position: 'top-center'})
         // Reset Form
@@ -69,7 +79,28 @@ export function handleDeleteContact (contactId, history) {
         history.push('/app/contacts')
       })
       .catch(error => {
-        console.log('Error deleting contact', error.message)
+        console.log('Error deleting contact: ', error.message)
+      })
+  }
+}
+
+export function handleUpdateContact (contactId, contactObj, history, setFormikSubmitting = null) {
+  return (dispatch) => {
+    return updateContact(contactId, contactObj)
+      .then(contact => {
+        // Update the contact in state
+        dispatch(updateStoreContact(contact))
+        // Pop a toastie
+        toast.success('Contact updated.', { position: 'top-center'})
+        // Redirect back to contacts list
+        history.push('/app/contacts')
+      })
+      .catch(error => {
+        console.log('Error updating contact: ', error.message)
+        // Pop a toastie
+        toast.error('Could not update contact. Please try again.', { position: 'top-center'})
+        // Reset Form
+        if (setFormikSubmitting) setFormikSubmitting(false)
       })
   }
 }

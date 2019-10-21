@@ -101,12 +101,15 @@ const MySelect = ({ options, field, form }) => {
     singleValue: (base) => ({...base, color: '#626471'}),
   }
 
+  // For INITIAL VALUE in this select, found in the ternary of `value=` prop
+  // I must compare both the id and type off of the value object
+  // in order to do a deep object comparison
   return (
     <Select
       options={options}
       placeholder='Select Shipper or Carrier...'
       name={field.name}
-      value={options ? options.find(option => option.value === field.value) : ''}
+      value={options ? options.find(option => (option.value.id === field.value.id) && (option.value.type === field.value.type)) : ''}
       onChange={(option) => form.setFieldValue(field.name, option.value)}
       onBlur={field.onBlur}
       styles={customStyles}

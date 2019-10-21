@@ -27,7 +27,14 @@ const NewContact = ({ shippers, carriers, closePath, dispatch, history }) => {
 
   const parentSelectOptions = optionsArrayForShippersAndCarriers(shippers, carriers)
 
-  const initialFormValues = { name: '', phone: '', email: '', notes: '', parent: {} }
+  // If initial value desired for `parent` property, that is the 'select', it must be in the form of { type: string, id: int }
+  const initialFormValues = {
+    name: '',
+    phone: '',
+    email: '',
+    notes: '',
+    parent: {},
+  }
 
   return (
     <ModalContainer closePath={closePath}>

@@ -32,7 +32,8 @@ module Api::V1
     # PATCH/PUT /contacts/1
     def update
       @contact.update(contact_params)
-      head :no_content
+      
+      json_response(@contact, :accepted)
     end
 
     # DELETE /contacts/1

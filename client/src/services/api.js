@@ -102,6 +102,14 @@ export const deleteContact = async (id) => {
     return result
 }
 
+export const updateContact = async (id, contactObj) => {
+  const updateContactUrl = `${contactsUrl}/${id}`
+  const result = await ky.put(updateContactUrl, {...createHeaders(), json: contactObj }).then(res => res.json())
+
+  // Successful response will be status 202 with NEW contact object (similar to createContact response)
+  return result
+}
+
 // Shippers
 
 export const getShippers = async () => {
