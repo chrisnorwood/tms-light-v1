@@ -16,9 +16,10 @@ class MainContainer extends Component {
 
     return (
       <div className='bg-grey-lighter text-base text-grey-darkest font-normal relative min-h-screen'>
-        <div className='h-2 bg-primary'></div>
         <SideNav />
+        <div className='h-2 bg-primary'></div>
         <div id='content' className='ml-56 mt-10 pb-10'>
+          
           <div className='w-full'>
             <div className='w-11/12 mx-auto pt-4'>
               <Route path={`${match.path}`} exact component={Dashboard} />
