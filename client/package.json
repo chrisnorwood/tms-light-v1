@@ -22,8 +22,8 @@
   "scripts": {
     "start": "npm-run-all --parallel watch:css start:react",
     "build": "npm-run-all build:css",
-    "build:css": "postcss src/styles/src/ --dir src/styles",
-    "watch:css": "postcss src/styles/src/ --dir src/styles -w",
+    "build:css": "postcss src/styles/src/ --dir src/styles/dist",
+    "watch:css": "postcss src/styles/src/ --dir src/styles/dist -w",
     "start:react": "PORT=3000 react-scripts start",
     "build:react": "react-scripts build",
     "test": "react-scripts test",
