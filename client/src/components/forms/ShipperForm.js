@@ -28,14 +28,15 @@ const ShipperForm = ({ initialValues, selectOptionsArray, buttonText, submitFunc
             />
             <ErrorMessage name='companyName' component='div' className='ml-4 mt-2 text-red-600 text-xs' /> 
           </div>
-          {/* <div className='mb-3'>
-            <label className='block ml-2 mb-2 text-sm font-bold' htmlFor='primaryContactId'>Primary Contact</label>
-            <Field
-              name='primaryContactId'
-              component={MySelect}
-              options={selectOptionsArray}
-            />
-          </div> */}
+          
+            <div className='mb-3'>
+              <label className='block ml-2 mb-2 text-sm font-bold' htmlFor='primaryContactId'>Primary Contact</label>
+              <Field
+                name='primaryContactId'
+                component={MySelect}
+                options={selectOptionsArray}
+              />
+            </div>
           <div className='mb-3'>
             <label className='block ml-2 mb-2 text-sm font-bold' htmlFor='name'>Notes</label>
             <Field

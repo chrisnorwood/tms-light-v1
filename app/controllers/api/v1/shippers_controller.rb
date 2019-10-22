@@ -42,7 +42,7 @@ module Api::V1
 
       # Only allow a trusted parameter "white list" through.
       def shipper_params
-        params.require(:shipper).permit(:company_name, :notes, :user_id)
+        params.require(:shipper).permit(:company_name, :notes, :user_id, :primary_contact_id)
       end
   end
 end

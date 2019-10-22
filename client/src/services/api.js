@@ -132,6 +132,14 @@ export const deleteShipper = async (id) => {
   return result
 }
 
+export const updateShipper = async (id, shipperObj) => {
+  const updateShipperUrl = `${shippersUrl}/${id}`
+  const result = await ky.put(updateShipperUrl, {...createHeaders(), json: shipperObj }).then(res => res.json())
+
+  // Successful response will be status 202 with updated shipper object (similar to createShipper response)
+  return result
+}
+
 // Carriers
 export const getCarriers = async () => {
   const result = await ky.get(carriersUrl, createHeaders())

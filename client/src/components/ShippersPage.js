@@ -6,11 +6,11 @@ import ReactTable from 'react-table'
 import { FaEye, FaEdit, FaTrash, FaPlus } from 'react-icons/fa'
 import NewShipper from './modals/shippers/NewShipper'
 import ViewShipper from './modals/shippers/ViewShipper'
-// import EditShipper from './modals/shippers/EditShipper'
+import EditShipper from './modals/shippers/EditShipper'
 import DeleteShipper from './modals/shippers/DeleteShipper'
 
 const ShippersPage = (props) => {
-  const { shippers, match } = props
+  const { shippers, contacts, match } = props
   const shippersArray = Object.values(shippers)
 
   const columns = [
@@ -41,12 +41,14 @@ const ShippersPage = (props) => {
           maxWidth: 150,
           Cell: row => {
             const contactId = row.original.primary_contact_id
+            const contact = contacts[contactId]
+            const contactName = contact
+              ? contact.name
+              : <span className='italic'>None</span>
 
             return (
               <Fragment>
-                {contactId
-                  ? contactId
-                  : <span className='italic'>None</span>}
+                {contactName}
               </Fragment>
             )
           }
@@ -103,6 +105,10 @@ const ShippersPage = (props) => {
 
         <Route path={`${match.path}/:shipperId/view`} render={(props) => (
           <ViewShipper {...props} closePath={match.path}/>
+        )} />
+
+        <Route path={`${match.path}/:shipperId/edit`} render={(props) => (
+          <EditShipper {...props} closePath={match.path}/>
         )} />
 
         <Route path={`${match.path}/:shipperId/delete`} render={(props) => (

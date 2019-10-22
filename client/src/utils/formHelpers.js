@@ -22,11 +22,11 @@ export const optionsArrayForShippersAndCarriers = (shippers, carriers) => {
   return combinedArray
 }
 
-export const optionsArrayOfShipperContactsById = (contacts, id) => {
-  const contactsByShipperId = Object.values(contacts).filter(item => (
-    item.contactable_type === 'Shipper' && item.contactable_id === id
-  ))
-
-  console.log('in form helper', contactsByShipperId)
-  return contactsByShipperId
+// Takes in array of Contacts (already filtered out by mapStateToProps) to return
+// an options array to be used by react-select in my ShipperForm and CarrierForm
+export const optionsArrayOfContacts = (contactsArray) => {
+  return contactsArray.map(contact => ({
+    value: contact.id,
+    label: contact.name
+  }))
 }
