@@ -20,8 +20,9 @@ const ContactForm = ({ initialValues, selectOptionsArray, buttonText, submitFunc
         submitFunction(values, setSubmitting)
       }}
       render={({ errors, touched, isSubmitting }) => (
-        <Form className='bg-grey-lightest px-10 py-10'>
+        <Form className='bg-grey-lightest px-10 py-8'>
           <div className='mb-3'>
+            <label className='block ml-2 mb-2 text-sm font-bold' htmlFor='name'>Name</label>
             <Field
               className={`border w-full p-3 ${errors.name && touched.name ? 'border-red-600' : 'border-grey'}`}
               type='text'
@@ -31,6 +32,7 @@ const ContactForm = ({ initialValues, selectOptionsArray, buttonText, submitFunc
             <ErrorMessage name='name' component='div' className='ml-4 mt-2 text-red-600 text-xs' /> 
           </div>
           <div className='mb-3'>
+            <label className='block ml-2 mb-2 text-sm font-bold' htmlFor='name'>Phone</label>
             <Field
               className={`border w-full p-3 ${errors.phone && touched.phone ? 'border-red-600' : 'border-grey'}`}
               type='phone'
@@ -40,6 +42,7 @@ const ContactForm = ({ initialValues, selectOptionsArray, buttonText, submitFunc
             <ErrorMessage name='phone' component='div' className='ml-4 mt-2 text-red-600 text-xs' /> 
           </div>
           <div className='mb-3'>
+            <label className='block ml-2 mb-2 text-sm font-bold' htmlFor='name'>Email</label>
             <Field
               className={`border w-full p-3 ${errors.email && touched.email ? 'border-red-600' : 'border-grey'}`}
               type='text'
@@ -49,6 +52,7 @@ const ContactForm = ({ initialValues, selectOptionsArray, buttonText, submitFunc
             <ErrorMessage name='email' component='div' className='ml-4 mt-2 text-red-600 text-xs' /> 
           </div>
           <div className='mb-3'>
+            <label className='block ml-2 mb-2 text-sm font-bold' htmlFor='name'>Carrier/Shipper</label>
             <Field
               name='parent'
               component={MySelect}
@@ -57,6 +61,7 @@ const ContactForm = ({ initialValues, selectOptionsArray, buttonText, submitFunc
             <ErrorMessage name='parent' component='div' className='ml-4 mt-2 text-red-600 text-xs' /> 
           </div>
           <div className='mb-3'>
+            <label className='block ml-2 mb-2 text-sm font-bold' htmlFor='name'>Notes</label>
             <Field
               className={`border w-full p-3 border-grey`}
               component='textarea'
