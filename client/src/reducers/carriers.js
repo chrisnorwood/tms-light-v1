@@ -1,4 +1,4 @@
-import { RECEIVE_CARRIERS } from '../actions/carriers'
+import { RECEIVE_CARRIERS, ADD_CARRIER } from '../actions/carriers'
 
 const initialState = {}
 
@@ -8,6 +8,11 @@ export default function loads(state = initialState, action) {
       return {
         ...state,
         ...action.payload.carriers
+      }
+    case ADD_CARRIER :
+      return {
+        ...state,
+        [action.payload.carrier.id]: action.payload.carrier,
       }
     default :
       return state

@@ -99,9 +99,9 @@ const CarriersPage = (props) => {
           className='-striped -highlight'
         />
 
-        {/* <Route path={`${match.path}/new`} render={(props) => (
+        <Route path={`${match.path}/new`} render={(props) => (
           <NewCarrier {...props} closePath={match.path} />
-        )} /> */}
+        )} />
 
         <Route path={`${match.path}/:carrierId/view`} render={(props) => (
           <ViewCarrier {...props} closePath={match.path}/>
