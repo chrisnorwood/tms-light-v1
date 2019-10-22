@@ -90,9 +90,14 @@ const MySelect = ({ options, field, form }) => {
       placeholder='Select Primary Contact...'
       name={field.name}
       value={options ? options.find(option => option.value === field.value) : ''}
-      onChange={(option) => form.setFieldValue(field.name, option.value)}
+      onChange={(option) => {
+        // the following variable allows for option to be reset to null via isClearable prop
+        const newValue = option ? option.value : ''
+        return form.setFieldValue(field.name, newValue)
+      }}
       onBlur={field.onBlur}
       styles={customStyles}
+      isClearable={true}
     />
   )
 }
