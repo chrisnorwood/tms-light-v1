@@ -4,19 +4,19 @@ import { Link } from 'react-router-dom'
 import { connect } from 'react-redux'
 import ModalContainer from '../ModalContainer'
 
-const ViewShipper = ({ shipper, primaryContact, closePath }) => {
-  if (!shipper) return <ModalContainer closePath={closePath}><div className='text-center text-xl'>That is not a valid shipper.</div></ModalContainer>
+const ViewCarrier = ({ carrier, primaryContact, closePath }) => {
+  if (!carrier) return <ModalContainer closePath={closePath}><div className='text-center text-xl'>That is not a valid carrier.</div></ModalContainer>
 
   return (
     <ModalContainer closePath={closePath}>
       <div className='border-b border-grey py-2 font-bold text-black text-center text-lg tracking-widest uppercase'>
-        Shipper Details
+        Carrier Details
       </div>
       <div className='m-4'>
         <ul className='labeled-list'>
           <li>
             <label>Company Name</label>
-            <div>{shipper.company_name}</div>
+            <div>{carrier.company_name}</div>
           </li>
           <li>
             <label>Primary Contact</label>
@@ -28,7 +28,7 @@ const ViewShipper = ({ shipper, primaryContact, closePath }) => {
           </li>
           <li>
             <label>Notes</label>
-            <div>{shipper.notes}</div>
+            <div>{carrier.notes}</div>
           </li>
         </ul>
       </div>
@@ -44,28 +44,28 @@ const ViewShipper = ({ shipper, primaryContact, closePath }) => {
   )
 }
 
-ViewShipper.propTypes = {
+ViewCarrier.propTypes = {
   match: PropTypes.object.isRequired,
   history: PropTypes.object.isRequired,
   closePath: PropTypes.string.isRequired,
-  shipper: PropTypes.object,
+  carrier: PropTypes.object,
   primaryContact: PropTypes.object,
 }
 
 function mapStateToProps (state, ownProps) {
-  const shipperId = ownProps.match.params.shipperId
-  const shipper = state.shippers[shipperId]
+  const carrierId = ownProps.match.params.carrierId
+  const carrier = state.carriers[carrierId]
   let primaryContact = {}
 
-  if (shipper) {
-    const primaryContactId = shipper.primary_contact_id
+  if (carrier) {
+    const primaryContactId = carrier.primary_contact_id
     primaryContact = state.contacts[primaryContactId]
   }
 
   return {
-    shipper,
+    carrier,
     primaryContact,
   }
 }
 
-export default connect(mapStateToProps)(ViewShipper)
+export default connect(mapStateToProps)(ViewCarrier)

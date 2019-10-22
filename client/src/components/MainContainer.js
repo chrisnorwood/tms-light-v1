@@ -6,6 +6,7 @@ import Dashboard from './Dashboard'
 import LoadsPage from './LoadsPage'
 import ContactsPage from './ContactsPage'
 import ShippersPage from './ShippersPage'
+import CarriersPage from './CarriersPage'
 
 class MainContainer extends Component {
   componentDidMount() {
@@ -26,6 +27,7 @@ class MainContainer extends Component {
               <Route path={`${match.path}/loads`} component={LoadsPage} />
               <Route path={`${match.path}/contacts`} component={ContactsPage} />
               <Route path={`${match.path}/shippers`} component={ShippersPage} />
+              <Route path={`${match.path}/carriers`} component={CarriersPage} />
             </div>
           </div>
         </div>
