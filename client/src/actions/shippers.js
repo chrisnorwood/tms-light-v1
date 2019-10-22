@@ -1,8 +1,9 @@
-import { createShipper } from '../services/api'
+import { createShipper, deleteShipper } from '../services/api'
 import { toast } from 'react-toastify'
 
 export const RECEIVE_SHIPPERS = 'RECEIVE_SHIPPERS'
 export const ADD_SHIPPER = 'ADD_SHIPPER'
+export const REMOVE_SHIPPER = 'REMOVE_SHIPPER'
 
 export function receiveShippers (shippers) {
   return {
@@ -18,6 +19,15 @@ function addShipper (shipper) {
     type: ADD_SHIPPER,
     payload: {
       shipper
+    }
+  }
+}
+
+function removeShipper (shipperId) {
+  return {
+    type: REMOVE_SHIPPER,
+    payload: {
+      shipperId
     }
   }
 }
@@ -43,6 +53,23 @@ export function handleCreateShipper (shipperObj, history, setFormikSubmitting = 
         toast.error('Could not create shipper. Please try again.', { position: 'top-center'})
         // Reset Form
         if (setFormikSubmitting) setFormikSubmitting(false)
+      })
+  }
+}
+
+export function handleDeleteShipper (shipperId, history) {
+  return (dispatch) => {
+    return deleteShipper(shipperId)
+      .then(success => {
+        // Remove the shipper from state
+        dispatch(removeShipper(shipperId))
+        // Pop a toastie
+        toast.success('Shipper deleted.', { position: 'top-center'})
+        // Redirect back to contacts list
+        history.push('/app/shippers')
+      })
+      .catch(error => {
+        console.log('Error deleting shipper: ', error.message)
       })
   }
 }

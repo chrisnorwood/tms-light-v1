@@ -67,7 +67,7 @@ ShipperForm.propTypes = {
     notes: PropTypes.string.isRequired,
     primaryContactId: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
   }).isRequired,
-  selectOptionsArray: PropTypes.array.isRequired,
+  selectOptionsArray: PropTypes.array,
   buttonText: PropTypes.string.isRequired,
   submitFunction: PropTypes.func.isRequired,
 }

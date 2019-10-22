@@ -124,6 +124,14 @@ export const createShipper = async (shipperObj) => {
   return result
 }
 
+export const deleteShipper = async (id) => {
+  const deleteShipperUrl = `${shippersUrl}/${id}`
+  const result = await ky.delete(deleteShipperUrl, createHeaders())
+
+  // Successful response will be status 204 with no content
+  return result
+}
+
 // Carriers
 export const getCarriers = async () => {
   const result = await ky.get(carriersUrl, createHeaders())

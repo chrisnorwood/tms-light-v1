@@ -1,4 +1,5 @@
-import { RECEIVE_SHIPPERS, ADD_SHIPPER } from '../actions/shippers'
+import { removeFromObjectByKey } from '../utils/storeHelpers'
+import { RECEIVE_SHIPPERS, ADD_SHIPPER, REMOVE_SHIPPER } from '../actions/shippers'
 
 const initialState = {}
 
@@ -14,6 +15,8 @@ export default function loads(state = initialState, action) {
         ...state,
         [action.payload.shipper.id]: action.payload.shipper,
       }
+    case REMOVE_SHIPPER :
+      return removeFromObjectByKey(state, action.payload.shipperId)
     default :
       return state
   }
