@@ -28,12 +28,7 @@ const CarriersPage = (props) => {
           Header: 'Company',
           accessor: 'company_name',
           headerClassName: 'bg-grey-light text-lg',
-          
-        },
-        {
-          Header: 'Notes',
-          accessor: 'notes',
-          headerClassName: 'bg-grey-light text-lg',
+          maxWidth: 250,
         },
         {
           Header: 'Primary Contact',
@@ -52,6 +47,11 @@ const CarriersPage = (props) => {
               </Fragment>
             )
           }
+        },
+        {
+          Header: 'Notes',
+          accessor: 'notes',
+          headerClassName: 'bg-grey-light text-lg',
         },
         {
           Header: 'Actions',

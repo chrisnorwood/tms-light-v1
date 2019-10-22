@@ -28,12 +28,8 @@ const ShippersPage = (props) => {
           Header: 'Company',
           accessor: 'company_name',
           headerClassName: 'bg-grey-light text-lg',
+          maxWidth: 250,
           
-        },
-        {
-          Header: 'Notes',
-          accessor: 'notes',
-          headerClassName: 'bg-grey-light text-lg',
         },
         {
           Header: 'Primary Contact',
@@ -52,6 +48,11 @@ const ShippersPage = (props) => {
               </Fragment>
             )
           }
+        },
+        {
+          Header: 'Notes',
+          accessor: 'notes',
+          headerClassName: 'bg-grey-light text-lg',
         },
         {
           Header: 'Actions',
