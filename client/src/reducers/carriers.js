@@ -1,4 +1,5 @@
-import { RECEIVE_CARRIERS, ADD_CARRIER } from '../actions/carriers'
+import { removeFromObjectByKey } from '../utils/storeHelpers'
+import { RECEIVE_CARRIERS, ADD_CARRIER, REMOVE_CARRIER } from '../actions/carriers'
 
 const initialState = {}
 
@@ -14,6 +15,8 @@ export default function loads(state = initialState, action) {
         ...state,
         [action.payload.carrier.id]: action.payload.carrier,
       }
+    case REMOVE_CARRIER :
+      return removeFromObjectByKey(state, action.payload.carrierId)
     default :
       return state
   }

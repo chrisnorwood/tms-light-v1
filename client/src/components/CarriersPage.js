@@ -109,11 +109,11 @@ const CarriersPage = (props) => {
 
         {/* <Route path={`${match.path}/:carrierId/edit`} render={(props) => (
           <EditCarrier {...props} closePath={match.path}/>
-        )} />
+        )} /> */}
 
         <Route path={`${match.path}/:carrierId/delete`} render={(props) => (
           <DeleteCarrier {...props} closePath={match.path}/>
-        )} /> */}
+        )} />
       </div>
     </Fragment>
   )

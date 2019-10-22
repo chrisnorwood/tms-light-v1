@@ -152,3 +152,11 @@ export const createCarrier = async (carrierObj) => {
 
   return result
 }
+
+export const deleteCarrier = async (id) => {
+  const deleteCarrierUrl = `${carriersUrl}/${id}`
+  const result = await ky.delete(deleteCarrierUrl, createHeaders())
+
+  // Successful response will be status 204 with no content
+  return result
+}
