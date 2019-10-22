@@ -5,7 +5,7 @@ import { connect } from 'react-redux'
 import ReactTable from 'react-table'
 import { FaEye, FaEdit, FaTrash, FaPlus } from 'react-icons/fa'
 import NewShipper from './modals/shippers/NewShipper'
-// import ViewShipper from './modals/shippers/ViewShipper'
+import ViewShipper from './modals/shippers/ViewShipper'
 // import EditShipper from './modals/shippers/EditShipper'
 import DeleteShipper from './modals/shippers/DeleteShipper'
 
@@ -99,6 +99,10 @@ const ShippersPage = (props) => {
 
         <Route path={`${match.path}/new`} render={(props) => (
           <NewShipper {...props} closePath={match.path} />
+        )} />
+
+        <Route path={`${match.path}/:shipperId/view`} render={(props) => (
+          <ViewShipper {...props} closePath={match.path}/>
         )} />
 
         <Route path={`${match.path}/:shipperId/delete`} render={(props) => (
