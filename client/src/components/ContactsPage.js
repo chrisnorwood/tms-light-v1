@@ -102,7 +102,7 @@ const ContactsPage = (props) => {
     <Fragment>
       <div className='flex mb-4 px-4 justify-end'>
         <Link to={`${match.path}/new`} className='new-item-btn'>
-            <span className='flex items-center'><FaPlus className='inline mr-1' /> New Contact</span>
+            <span className='flex items-center'><FaPlus className='inline mr-1' />New Contact</span>
         </Link>
       </div>
       <div className='bg-white shadow-xl rounded-lg w-full p-4'>

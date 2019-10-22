@@ -5,6 +5,7 @@ import SideNav from './SideNav'
 import Dashboard from './Dashboard'
 import LoadsPage from './LoadsPage'
 import ContactsPage from './ContactsPage'
+import ShippersPage from './ShippersPage'
 
 class MainContainer extends Component {
   componentDidMount() {
@@ -19,12 +20,12 @@ class MainContainer extends Component {
         <SideNav />
         <div className='h-2 bg-primary'></div>
         <div id='content' className='ml-56 mt-10 pb-10'>
-          
           <div className='w-full'>
             <div className='w-11/12 mx-auto pt-4'>
               <Route path={`${match.path}`} exact component={Dashboard} />
               <Route path={`${match.path}/loads`} component={LoadsPage} />
               <Route path={`${match.path}/contacts`} component={ContactsPage} />
+              <Route path={`${match.path}/shippers`} component={ShippersPage} />
             </div>
           </div>
         </div>
