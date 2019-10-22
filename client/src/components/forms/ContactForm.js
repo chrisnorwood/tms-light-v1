@@ -32,7 +32,7 @@ const ContactForm = ({ initialValues, selectOptionsArray, buttonText, submitFunc
             <ErrorMessage name='name' component='div' className='ml-4 mt-2 text-red-600 text-xs' /> 
           </div>
           <div className='mb-3'>
-            <label className='block ml-2 mb-2 text-sm font-bold' htmlFor='name'>Phone</label>
+            <label className='block ml-2 mb-2 text-sm font-bold' htmlFor='phone'>Phone</label>
             <Field
               className={`border w-full p-3 ${errors.phone && touched.phone ? 'border-red-600' : 'border-grey'}`}
               type='phone'
@@ -42,7 +42,7 @@ const ContactForm = ({ initialValues, selectOptionsArray, buttonText, submitFunc
             <ErrorMessage name='phone' component='div' className='ml-4 mt-2 text-red-600 text-xs' /> 
           </div>
           <div className='mb-3'>
-            <label className='block ml-2 mb-2 text-sm font-bold' htmlFor='name'>Email</label>
+            <label className='block ml-2 mb-2 text-sm font-bold' htmlFor='email'>Email</label>
             <Field
               className={`border w-full p-3 ${errors.email && touched.email ? 'border-red-600' : 'border-grey'}`}
               type='text'
@@ -52,7 +52,7 @@ const ContactForm = ({ initialValues, selectOptionsArray, buttonText, submitFunc
             <ErrorMessage name='email' component='div' className='ml-4 mt-2 text-red-600 text-xs' /> 
           </div>
           <div className='mb-3'>
-            <label className='block ml-2 mb-2 text-sm font-bold' htmlFor='name'>Carrier/Shipper</label>
+            <label className='block ml-2 mb-2 text-sm font-bold' htmlFor='parent'>Carrier/Shipper</label>
             <Field
               name='parent'
               component={MySelect}
@@ -61,7 +61,7 @@ const ContactForm = ({ initialValues, selectOptionsArray, buttonText, submitFunc
             <ErrorMessage name='parent' component='div' className='ml-4 mt-2 text-red-600 text-xs' /> 
           </div>
           <div className='mb-3'>
-            <label className='block ml-2 mb-2 text-sm font-bold' htmlFor='name'>Notes</label>
+            <label className='block ml-2 mb-2 text-sm font-bold' htmlFor='notes'>Notes</label>
             <Field
               className={`border w-full p-3 border-grey`}
               component='textarea'

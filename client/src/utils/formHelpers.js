@@ -21,3 +21,12 @@ export const optionsArrayForShippersAndCarriers = (shippers, carriers) => {
 
   return combinedArray
 }
+
+export const optionsArrayOfShipperContactsById = (contacts, id) => {
+  const contactsByShipperId = Object.values(contacts).filter(item => (
+    item.contactable_type === 'Shipper' && item.contactable_id === id
+  ))
+
+  console.log('in form helper', contactsByShipperId)
+  return contactsByShipperId
+}

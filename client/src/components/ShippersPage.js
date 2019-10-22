@@ -96,6 +96,10 @@ const ShippersPage = (props) => {
           defaultSorted={[{ id: 'id', desc: true }]}
           className='-striped -highlight'
         />
+
+        <Route path={`${match.path}/new`} render={(props) => (
+          <NewShipper {...props} closePath={match.path} />
+        )} />
       </div>
     </Fragment>
   )

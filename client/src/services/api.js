@@ -118,6 +118,12 @@ export const getShippers = async () => {
   return result
 }
 
+export const createShipper = async (shipperObj) => {
+  const result = await ky.post(shippersUrl, {...createHeaders(), json: shipperObj }).then(res => res.json())
+
+  return result
+}
+
 // Carriers
 export const getCarriers = async () => {
   const result = await ky.get(carriersUrl, createHeaders())
