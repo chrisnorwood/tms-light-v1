@@ -1,9 +1,10 @@
-import { createCarrier, deleteCarrier } from '../services/api'
+import { createCarrier, deleteCarrier, updateCarrier } from '../services/api'
 import { toast } from 'react-toastify'
 
 export const RECEIVE_CARRIERS = 'RECEIVE_CARRIERS'
 export const ADD_CARRIER = 'ADD_CARRIER'
 export const REMOVE_CARRIER = 'REMOVE_CARRIER'
+export const UPDATE_CARRIER = 'UPDATE_CARRIER'
 
 export function receiveCarriers (carriers) {
   return {
@@ -28,6 +29,15 @@ function removeCarrier (carrierId) {
     type: REMOVE_CARRIER,
     payload: {
       carrierId
+    }
+  }
+}
+
+function updateStoreCarrier (carrier) {
+  return {
+    type: UPDATE_CARRIER,
+    payload: {
+      carrier,
     }
   }
 }
@@ -70,6 +80,27 @@ export function handleDeleteCarrier (carrierId, history) {
       })
       .catch(error => {
         console.log('Error deleting carrier: ', error.message)
+      })
+  }
+}
+
+export function handleUpdateCarrier (carrierId, carrierObj, history, setFormikSubmitting = null) {
+  return (dispatch) => {
+    return updateCarrier(carrierId, carrierObj)
+      .then(carrier => {
+        // Update the carrier in state
+        dispatch(updateStoreCarrier(carrier))
+        // Pop a toastie
+        toast.success('Carrier updated.', { position: 'top-center'})
+        // Redirect back to contacts list
+        history.push('/app/carriers')
+      })
+      .catch(error => {
+        console.log('Error updating carrier: ', error.message)
+        // Pop a toastie
+        toast.error('Could not update carrier. Please try again.', { position: 'top-center'})
+        // Reset Form
+        if (setFormikSubmitting) setFormikSubmitting(false)
       })
   }
 }

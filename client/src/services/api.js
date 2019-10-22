@@ -160,3 +160,11 @@ export const deleteCarrier = async (id) => {
   // Successful response will be status 204 with no content
   return result
 }
+
+export const updateCarrier = async (id, carrierObj) => {
+  const updateCarrierUrl = `${carriersUrl}/${id}`
+  const result = await ky.put(updateCarrierUrl, {...createHeaders(), json: carrierObj }).then(res => res.json())
+
+  // Successful response will be status 202 with updated carrier object (similar to createCarrier response)
+  return result
+}
