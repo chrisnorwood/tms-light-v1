@@ -1,7 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
-// import { handleCreateLoad } from '../../../actions/loads'
+import { handleCreateLoad } from '../../../actions/loads'
 import { optionsArrayOfCompanies } from '../../../utils/formHelpers'
 import ModalContainer from '../ModalContainer'
 import LoadForm from '../../forms/LoadForm'
@@ -28,7 +28,7 @@ const NewLoad = ({ shippers, carriers, closePath, dispatch, history }) => {
     }
 
     console.log('Load object: ', loadValues)
-    // dispatch(handleCreateLoad(loadValues, history, setSubmitting))
+    dispatch(handleCreateLoad(loadValues, history, setSubmitting))
   }
 
   const carrierSelectOptions = optionsArrayOfCompanies(carriers)

@@ -74,9 +74,15 @@ export const getInitialData = () => {
 }
 
 // Loads
-// (these functions return promises)
+// ( most of these functions return promises)
 export const getLoads = async () => {
   const result = await ky.get(loadsUrl, createHeaders())
+
+  return result
+}
+
+export const createLoad = async (loadObj) => {
+  const result = await ky.post(loadsUrl, {...createHeaders(), json: loadObj }).then(res => res.json())
 
   return result
 }
