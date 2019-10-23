@@ -106,8 +106,9 @@ html {
   */
   display: block;
   position: fixed;
-  z-index: 1;
-  padding-top: 100px;
+  z-index: 10;
+  padding-top: 50px;
+  padding-bottom: 50px;
   left: 0;
   top: 0;
   width: 100%;
@@ -166,4 +167,13 @@ html {
 
 .labeled-list label:after {
   content: ':';
+}
+
+/* Form Elements */
+
+.customDatePickerWidth, 
+.customDatePickerWidth > div.react-datepicker-wrapper, 
+.customDatePickerWidth > div > div.react-datepicker__input-container,
+.customDatePickerWidth > div > div.react-datepicker__input-container input {
+  width: 100%;
 }

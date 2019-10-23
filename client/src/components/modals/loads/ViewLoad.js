@@ -31,17 +31,17 @@ const ViewLoad = ({ load, shipper, carrier, closePath }) => {
             </div>
           </li>
           <li>
-            <label>Charged</label>
-            <div>
-              {new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(load.amt_charged)}
-            </div>
-          </li>
-          <li>
             <label>Carrier</label>
             <div>
               { carrier
                 ? carrier.company_name
                 : <span className='italic'>None</span>}
+            </div>
+          </li>
+          <li>
+            <label>Charged</label>
+            <div>
+              {new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(load.amt_charged)}
             </div>
           </li>
           <li>

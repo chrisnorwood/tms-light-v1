@@ -30,3 +30,14 @@ export const optionsArrayOfContacts = (contactsArray) => {
     label: contact.name
   }))
 }
+
+// Takes in array of Carriers or Shippers to return
+// an options array to be used by react-select in my LoadForm
+export const optionsArrayOfCompanies = (companiesObj) => {
+  const companiesArray = Object.values(companiesObj)
+  
+  return companiesArray.map(company => ({
+    value: company.id,
+    label: company.company_name
+  }))
+}
