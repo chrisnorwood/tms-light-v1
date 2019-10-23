@@ -87,6 +87,22 @@ export const createLoad = async (loadObj) => {
   return result
 }
 
+export const deleteLoad = async (id) => {
+  const deleteLoadUrl = `${loadsUrl}/${id}`
+  const result = await ky.delete(deleteLoadUrl, createHeaders())
+
+  // Successful response will be status 204 with no content
+  return result
+}
+
+export const updateLoad = async (id, loadObj) => {
+  const updateLoadUrl = `${loadsUrl}/${id}`
+  const result = await ky.put(updateLoadUrl, {...createHeaders(), json: loadObj }).then(res => res.json())
+
+  // Successful response will be status 202 with NEW load object (similar to createLoad response)
+  return result
+}
+
 // Contacts
 export const getContacts = async () => {
   const result = await ky.get(contactsUrl, createHeaders())

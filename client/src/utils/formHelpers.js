@@ -41,3 +41,10 @@ export const optionsArrayOfCompanies = (companiesObj) => {
     label: company.company_name
   }))
 }
+
+// Returns true if input is instance of Date
+export const isDateObject = (input) => {
+  return (Object.prototype.toString.call(input) === "[object Date]")
+    ? true
+    : false
+}

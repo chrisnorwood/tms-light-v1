@@ -52,6 +52,7 @@ const LoadForm = ({ initialValues, shipperOptionsArray, carrierOptionsArray, but
                 name='pickUp'
                 value={values.pickUp}
                 onChange={setFieldValue}
+                placeholder='Select Pick Up Date...'
               />
             </div>
 
@@ -61,6 +62,7 @@ const LoadForm = ({ initialValues, shipperOptionsArray, carrierOptionsArray, but
                 name='delivery'
                 value={values.delivery}
                 onChange={setFieldValue}
+                placeholder='Select Delivery Date...'
               />
             </div>
           </div>
@@ -216,7 +218,7 @@ const MySelect = ({ options, field, form, placeholder, isClearable=false }) => {
   )
 }
 
-const DatePickerField = ({ name, value, onChange }) => {
+const DatePickerField = ({ name, value, onChange, placeholder }) => {
   return (
     <div className='customDatePickerWidth'>
       <DatePicker
@@ -226,6 +228,7 @@ const DatePickerField = ({ name, value, onChange }) => {
         onChange={val => {
           onChange(name, val)
         }}
+        placeholderText={placeholder}
       />
     </div>
   )
