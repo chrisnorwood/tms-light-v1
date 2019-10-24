@@ -1,16 +1,14 @@
-import { Component } from 'react'
+import { useEffect } from 'react'
 import { connect } from 'react-redux'
 import { handleLogout } from '../actions/auth'
 
-class LogoutPage extends Component {
-  componentDidMount() {
-    this.props.dispatch(handleLogout())
-    this.props.history.push('/login')
-  }
+const LogoutPage = ({ dispatch, history }) => {
+  useEffect(() => {
+    dispatch(handleLogout())
+    history.push('/login')
+  }, [dispatch, history])
   
-  render() {
-    return null
-  }
+  return null
 }
 
 export default connect()(LogoutPage)
