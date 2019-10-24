@@ -1,6 +1,6 @@
 import React from 'react'
 import { NavLink } from 'react-router-dom'
-import { FaBriefcase, FaTruck, FaAddressBook, FaTruckLoading, FaSignOutAlt, FaHome } from 'react-icons/fa'
+import { FaBriefcase, FaTruck, FaAddressBook, FaTruckLoading, FaSignOutAlt } from 'react-icons/fa'
 
 const SideNav = () => {
   return (
@@ -10,16 +10,6 @@ const SideNav = () => {
         TMS
       </div>
       <ul className='sidebar-nav'>
-        <li>
-          <NavLink
-            exact
-            to='/app'
-            className='nav-link'
-          >
-            <FaHome className='menu-icon'/>
-            <span className='ml-8'>Dashboard</span>
-          </NavLink>
-        </li>
         <li>
           <NavLink
             to='/app/loads'

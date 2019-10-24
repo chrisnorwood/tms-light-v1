@@ -62,6 +62,7 @@ function mapStateToProps (state, ownProps) {
   const carrier = state.carriers[carrierId]
   // Use `==` in second comparator to implicitly convert contact.contactable_id from string to integer for comparison
   const carrierContacts = Object.values(state.contacts)
+  // eslint-disable-next-line
     .filter(contact => contact.contactable_type === 'Carrier' && contact.contactable_id == carrierId)
 
   return {

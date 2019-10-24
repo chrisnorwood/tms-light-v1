@@ -62,6 +62,7 @@ function mapStateToProps (state, ownProps) {
   const shipper = state.shippers[shipperId]
   // Use `==` in second comparator to implicitly convert contact.contactable_id from string to integer for comparison
   const shipperContacts = Object.values(state.contacts)
+    // eslint-disable-next-line
     .filter(contact => contact.contactable_type === 'Shipper' && contact.contactable_id == shipperId)
 
   console.log(shipperContacts)
