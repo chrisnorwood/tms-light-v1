@@ -46,14 +46,16 @@ Technologies used include:
 ## Deploying for Production
 ### To Heroku:
 With heroku cli installed, run the following commands:
-1. `heroku apps:create`
-2. `heroku buildpacks:add heroku/nodejs --index 1`
-3. `heroku buildpacks:add heroku/ruby --index 2`
-4. `heroku config:set YARN_PRODUCTION=false`
-5. `git push heroku master` 
-6. `heroku run rake db:migrate`
-7. `heroku run rake db:seed`
-
+```console
+~/tms-light-v1$ git add -A && git commit -m "Ready for production"
+~/tms-light-v1$ heroku apps:create
+~/tms-light-v1$ heroku buildpacks:add heroku/nodejs --index 1
+~/tms-light-v1$ heroku buildpacks:add heroku/ruby --index 2
+~/tms-light-v1$ heroku config:set YARN_PRODUCTION=false
+~/tms-light-v1$ git push heroku master 
+~/tms-light-v1$ heroku run rake db:migrate
+~/tms-light-v1$ heroku run rake db:seed
+```
 ***Note**: YARN_PRODUCTION env. variable set to false, so `client/` devDependencies will properly build react app using npm-run-all, postcss, and purgecss. `react-scripts` still generates a minified production build without devDependencies, so this should not affect build size.*
 
 ## Misc. Notes
