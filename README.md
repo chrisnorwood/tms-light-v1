@@ -12,10 +12,10 @@ The application has a basic authentication scheme. The API generates a JWT upons
 
 Technologies used include:
 * Rails 6, in API mode
-* Rspec testing for API
-* React
-* Redux
-* react-router
+* RSpec API test suite
+* React + Redux + react-router
+* TailwindCSS
+* Webpacker, with PostCSS/PurgeCSS
 
 ## Demo
 [Click here](https://tms-light-demo.herokuapp.com/) for a live demo.
