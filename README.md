@@ -15,6 +15,8 @@
 `heroku buildpacks:add heroku/ruby --index 2`
 `heroku config:set YARN_PRODUCTION=false`
 `git push heroku master`
+`heroku run rake db:migrate`
+`heroku run rake db:seed`
 
 (Note: the YARN_PRODUCTION environment variable needs to be configured as such, so that the DevDependencies will from the /client package.json will be available to properly build our react app)
 
