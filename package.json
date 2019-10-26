@@ -2,13 +2,14 @@
   "name": "tms-light",
   "description": "Basic transportation management",
   "engines": {
-    "node": "12.4.0"
+    "node": "12.4.0",
+    "yarn": "1.17.3"
   },
   "dependencies": {},
   "devDependencies": {},
   "scripts": {
-    "build": "cd client && npm install && npm run build && cd ..",
+    "build": "yarn --cwd client install && yarn --cwd client build",
     "deploy": "cp -a client/build/. public/",
-    "postinstall": "npm run build && npm run deploy && echo 'Client built!'"
+    "postinstall": "yarn build && yarn deploy && echo 'Client built!'"
   }
 }
