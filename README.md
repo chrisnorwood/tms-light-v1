@@ -35,11 +35,15 @@ Technologies used include:
   * password: `foobar`
 
 ## Booting the dev server
-`rake start`
+```console
+~/tms-light-v1$ rake start
+```
 * Spins up Foreman with the API on port 3001 and the react app on port 3000 (with watcher for postcss+tailwind)
 
 ## Testing
-`rake rspec` 
+```console
+~/tms-light-v1$ rake rspec
+```
 * Runs all API specs with `--documentation` formatting
 * There are currently 124 passing examples (model and request specs)
 
