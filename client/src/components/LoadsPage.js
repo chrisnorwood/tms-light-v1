@@ -45,7 +45,7 @@ const LoadsPage = (props) => {
           Cell: props => (
             shippers[props.value]
               ? shippers[props.value].company_name
-              : 'Loading shipper...'
+              : 'No shipper found...'
           )
         },
         {
@@ -55,7 +55,7 @@ const LoadsPage = (props) => {
           Cell: props => (
             carriers[props.value]
               ? carriers[props.value].company_name
-              : 'Loading carrier...'
+              : 'No carrier found...'
           )
         },
         {
