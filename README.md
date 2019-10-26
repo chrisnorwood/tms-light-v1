@@ -1,5 +1,16 @@
 # TMS-Light (v1)
 
+## Table of Contents
+* [Preview](#preview)
+* [About](#about)
+* [Demo](#about)
+* [Booting the Dev Server](#booting-the-dev-server)
+* [Testing](#testing)
+* [Deploying to Heroku](#deploying-for-production)
+* [Misc. Notes](#misc-notes)
+* [Todo](#todo)
+* [Resources](#resources)
+
 ## Preview
 ![tms-light](https://user-images.githubusercontent.com/18252139/67624807-94a8a900-f7ea-11e9-9299-380d17a0547b.gif)
 
@@ -48,6 +59,10 @@ With heroku cli installed, run the following commands:
 ## Misc. Notes
 * Modify any user-created CSS in /client/src/styles/src/ folder (they will compile to /client/src/styles/ root)
 * PurgeCSS minimizes the CSS chunk from ~600kb to 35kb, so the postinstall script in /client is key
+
+## Todo
+- [ ] DRY up the front-end code, particularly the modals
+- [ ] Begin testing the front-end (unit tests?) (integration?)
 
 ## Resources
 * Initial project created similar in structure to the Heroku & Bruno B. tutorial
