@@ -1,4 +1,5 @@
 import { combineReducers } from 'redux'
+import { loadingBarReducer } from 'react-redux-loading-bar'
 import auth from './auth'
 import loads from './loads'
 import contacts from './contacts'
@@ -11,4 +12,5 @@ export default combineReducers({
   contacts,
   shippers,
   carriers,
+  loadingBar: loadingBarReducer,
 })
