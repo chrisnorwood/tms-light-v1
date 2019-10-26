@@ -8,8 +8,9 @@
   "dependencies": {},
   "devDependencies": {},
   "scripts": {
-    "build": "yarn --cwd client install && yarn --cwd client build",
+    "build": "yarn --cwd client build",
     "deploy": "cp -a client/build/. public/",
-    "postinstall": "yarn build && yarn deploy && echo 'Client built!'"
+    "postinstall": "yarn --cwd client install",
+    "heroku-postbuild": "yarn build && yarn deploy && echo 'Client built!'"
   }
 }
