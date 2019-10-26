@@ -1,27 +1,41 @@
 # TMS-Light (v1)
+This is a very basic "Transportation Management System" CRUD app, created to demonstrate a combined Rails API + React/Redux SPA. 
 
-## Testing
-`rake rspec` 
-* Run all API/rails specs with `--documentation` formatting
+There are 4 primary relational database models: "Loads, Contacts, Shippers & Carriers", plus a 5th "User" model that these all belong to.
+
+The application has a basic authentication scheme. The API generates a JWT upons successful login, and the React App passes this along from local storage via the `Authentication` header for subsequent requests.
+
+## Demo
+[Click here](https://tms-light-demo.herokuapp.com/) for a live demo.
+* Use the following credentials to view seeded DB records
+  * email: `foo@bar.com`
+  * password: `foobar`
 
 ## Booting the dev server
 `rake start`
 * Spins up Foreman with the API on port 3001 and the react app on port 3000 (with watcher for postcss+tailwind)
 
+## Testing
+`rake rspec` 
+* Runs all API specs with `--documentation` formatting
+* There are currently 124 passing examples (model and request specs)
+
 ## Deploying for Production
 ### To Heroku:
-`heroku apps:create`
-`heroku buildpacks:add heroku/nodejs --index 1`
-`heroku buildpacks:add heroku/ruby --index 2`
-`heroku config:set YARN_PRODUCTION=false`
-`git push heroku master`
-`heroku run rake db:migrate`
-`heroku run rake db:seed`
+With heroku cli installed, run the following commands:
+1. `heroku apps:create`
+2. `heroku buildpacks:add heroku/nodejs --index 1`
+3. `heroku buildpacks:add heroku/ruby --index 2`
+4. `heroku config:set YARN_PRODUCTION=false`
+5. `git push heroku master` 
+6. `heroku run rake db:migrate`
+7. `heroku run rake db:seed`
 
-(Note: the YARN_PRODUCTION environment variable needs to be configured as such, so that the DevDependencies will from the /client package.json will be available to properly build our react app)
+*Note*: the YARN_PRODUCTION environment variable gets configured as such, so that the devDependencies will from the /client/ subdirectory's package.json will be available to properly build our react app. `react-scripts` still generates a minified production build without devDependencies, so this should not effect build size.
 
 ## Misc. Notes
-* Due to some limitations with Tailwind/PostCSS + create-react-app, modify CSS in /client/src/styles/src/ folder (they will compile to /client/src/styles/ root)
+* Modify any user-created CSS in /client/src/styles/src/ folder (they will compile to /client/src/styles/ root)
+* PurgeCSS minimizes the CSS chunk from ~600kb to 35kb, so the postinstall script in /client is key
 
 ## Resources
 * Initial project created similar in structure to the Heroku & Bruno B. tutorial
