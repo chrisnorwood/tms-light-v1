@@ -54,7 +54,7 @@ With heroku cli installed, run the following commands:
 6. `heroku run rake db:migrate`
 7. `heroku run rake db:seed`
 
-*Note: YARN_PRODUCTION env. variable set to false, so `client/` devDependencies will properly build react app using npm-run-all, postcss, and purgecss. `react-scripts` still generates a minified production build without devDependencies, so this should not affect build size.*
+***Note**: YARN_PRODUCTION env. variable set to false, so `client/` devDependencies will properly build react app using npm-run-all, postcss, and purgecss. `react-scripts` still generates a minified production build without devDependencies, so this should not affect build size.*
 
 ## Misc. Notes
 * Modify any user-created CSS in /client/src/styles/src/ folder (they will compile to /client/src/styles/ root)
