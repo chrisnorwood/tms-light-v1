@@ -1,9 +1,21 @@
 # TMS-Light (v1)
+
+## Preview
+![tms-light](https://user-images.githubusercontent.com/18252139/67624807-94a8a900-f7ea-11e9-9299-380d17a0547b.gif)
+
+## About
 This is a very basic "Transportation Management System" CRUD app, created to demonstrate a combined Rails API + React/Redux SPA. 
 
 There are 4 primary relational database models: "Loads, Contacts, Shippers & Carriers", plus a 5th "User" model that these all belong to.
 
 The application has a basic authentication scheme. The API generates a JWT upons successful login, and the React App passes this along from local storage via the `Authentication` header for subsequent requests.
+
+Technologies used include:
+* Rails 6, in API mode
+* Rspec testing for API
+* React
+* Redux
+* react-router
 
 ## Demo
 [Click here](https://tms-light-demo.herokuapp.com/) for a live demo.
