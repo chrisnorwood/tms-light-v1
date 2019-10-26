@@ -9,21 +9,17 @@
 * Spins up Foreman with the API on port 3001 and the react app on port 3000 (with watcher for postcss+tailwind)
 
 ## Deploying for Production
-* must create ENV variable for SECRET_KEY_BASE in order for JWT to function properly
+### To Heroku:
+`heroku apps:create`
+`heroku buildpacks:add heroku/nodejs --index 1`
+`heroku buildpacks:add heroku/ruby --index 2`
+`heroku config:set YARN_PRODUCTION=false`
+`git push heroku master`
+
+(Note: the YARN_PRODUCTION environment variable needs to be configured as such, so that the DevDependencies will from the /client package.json will be available to properly build our react app)
 
 ## Misc. Notes
 * Due to some limitations with Tailwind/PostCSS + create-react-app, modify CSS in /client/src/styles/src/ folder (they will compile to /client/src/styles/ root)
-
-## Todo
-* ensure css lump is minizmized upon production deploy
-* consider changing Private/PublicRoute's auth check to come from auth on state (which will ONLY set when valid token) rather than local storage (initially having trouble due to async nature of the state setting)
-* Figure out how to properly route the catch all or '/' redirect to login appropriately with my Route HOCs
-* better error handling in auth actions
-* There is some race condition getting weird between my reAuth on index.js and manual type of /logout route
-* Test my API User model/controller a bit more (validations + no same user)
-* consider dispatching handleGetInitialData within the APP somewhere, rather than in the action ???? then the token can come from the store, but problem is I will still be passing the damn token
-* consider my delete reduct actions/reducer, with that helper function?  is it hacky???
-* should pass in my Contact and Its parents through props to the modal component as opposed to doing the full fresh recalculation every time in the freakin modal components
 
 ## Resources
 * Initial project created similar in structure to the Heroku & Bruno B. tutorial
