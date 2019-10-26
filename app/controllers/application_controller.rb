@@ -1,4 +1,7 @@
 class ApplicationController < ActionController::API
+  # this allows my controller to render html, for my fallback_index_html method
+  include ActionController::MimeResponds
+  
   include Response
   include ExceptionHandler
 
@@ -8,7 +11,9 @@ class ApplicationController < ActionController::API
 
   # define fallback url
   def fallback_index_html
-    render :file => 'public/index.html'
+    respond_to do |format|
+      format.html { render body: Rails.root.join('public/index.html').read }
+    end
   end
 
   private
