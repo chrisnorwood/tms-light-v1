@@ -1,3 +1,4 @@
+import { showLoading, hideLoading } from 'react-redux-loading-bar'
 import { loginUser, getCurrentUser, signupUser } from '../services/api'
 import { handleGetInitialData } from './shared'
 import { toast } from 'react-toastify'
@@ -74,7 +75,7 @@ export function handleLogout () {
 export function handleUserLogin (credentials, history, setFormikSubmitting = null) {
   return (dispatch) => {
     dispatch(setAuthError(null))
-
+    dispatch(showLoading())
     return loginUser(credentials)
       .then(authObject => {
         const { auth_token: token, user } = authObject
@@ -86,10 +87,13 @@ export function handleUserLogin (credentials, history, setFormikSubmitting = nul
         dispatch(setToken(token))
         // Get all initial data necessary for app
         dispatch(handleGetInitialData())
+        dispatch(hideLoading())
         // Redirect to Dashboard
         history.push('/app')
       })
       .catch(error => {
+        dispatch(hideLoading())
+        
         console.log('Login failed')
         // Pop a Toastie
         toast.error('Invalid email or password.', { position: 'top-center'})

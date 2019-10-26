@@ -2,6 +2,7 @@ import React, { Fragment } from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
 import { ToastContainer } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
+import { LoadingBar } from 'react-redux-loading-bar'
 import PrivateRoute from './hoc/PrivateRoute'
 import PublicRoute from './hoc/PublicRoute'
 import NotFound from './NotFound'
@@ -13,6 +14,7 @@ import MainContainer from './MainContainer'
 const App = () => {
   return (
     <Fragment>
+      <LoadingBar />
       <Router>
         <Switch>
           <PublicRoute path='/' exact restricted={true} component={LoginPage}/>
