@@ -19,7 +19,7 @@ const App = () => {
         <PrivateRoute path='/logout' component={LogoutPage} />
         <PrivateRoute path='/app' component={MainContainer} />
         <Route render={() => (
-          <Redirect to='/' />
+          <h1>404</h1>
         )} />
       </Router>
       <ToastContainer autoClose={3000} />
