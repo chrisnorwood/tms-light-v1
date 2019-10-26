@@ -1,9 +1,10 @@
 import React, { Fragment } from 'react';
-import { BrowserRouter as Router, Redirect, Route } from 'react-router-dom'
+import { BrowserRouter as Router, Route } from 'react-router-dom'
 import { ToastContainer } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
 import PrivateRoute from './hoc/PrivateRoute'
 import PublicRoute from './hoc/PublicRoute'
+import NotFound from './NotFound'
 import LoginPage from './LoginPage'
 import SignupPage from './SignupPage'
 import LogoutPage from './LogoutPage'
@@ -19,7 +20,7 @@ const App = () => {
         <PrivateRoute path='/logout' component={LogoutPage} />
         <PrivateRoute path='/app' component={MainContainer} />
         <Route render={() => (
-          <h1>404</h1>
+          <NotFound />
         )} />
       </Router>
       <ToastContainer autoClose={3000} />
