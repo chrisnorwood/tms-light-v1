@@ -26,9 +26,11 @@ const LoginPage = ({ dispatch, history }) => {
             <div className='border-b border-grey py-8 font-bold text-black text-center text-xl tracking-widest uppercase'>
               Welcome back!
             </div>
-            
+            <div className='text-center mt-4'>
+              (Try email: "foo@bar.com" & password "foobar" )
+            </div>
             <Formik
-              initialValues={{email: '', password: ''}}
+              initialValues={{email: 'foo@bar.com', password: 'foobar'}}
               validate={values => {
                 const errors = {};
                 if (!values.email) errors.email = 'Required'
@@ -40,8 +42,9 @@ const LoginPage = ({ dispatch, history }) => {
                 handleSubmit(values, setSubmitting)
               }}
               render={({ errors, touched, isSubmitting }) => (
-                <Form className='bg-grey-lightest px-10 py-10'>
+                <Form className='bg-grey-lightest px-10 py-6'>
                   <div className='mb-3'>
+                    <label className='block ml-2 mb-2 text-sm font-bold' htmlFor='email'>Email</label>
                     <Field
                       className={`border w-full p-3 ${errors.email && touched.email ? 'border-red-600' : 'border-grey'}`}
                       type='text'
@@ -51,6 +54,7 @@ const LoginPage = ({ dispatch, history }) => {
                     <ErrorMessage name='email' component='div' className='ml-4 mt-2 text-red-600 text-xs' /> 
                   </div>
                   <div className='mb-3'>
+                    <label className='block ml-2 mb-2 text-sm font-bold' htmlFor='password'>Password</label>
                     <Field
                       className={`border w-full p-3 ${errors.password && touched.password ? 'border-red-600' : 'border-grey'}`}
                       type='password'
