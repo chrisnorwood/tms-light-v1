@@ -27,7 +27,7 @@ const LoginPage = ({ dispatch, history }) => {
               Welcome back!
             </div>
             <div className='text-center mt-4'>
-              (Try email: "foo@bar.com" & password "foobar")
+              (Try email: "foo@bar.com" & password: "foobar")
             </div>
             <Formik
               initialValues={{email: 'foo@bar.com', password: 'foobar'}}
